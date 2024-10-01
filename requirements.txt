@@ -1,0 +1,8 @@
+tensorflow<2.11
+tensorflow_decision_forests
+numpy
+pandas
+scikit-learn
+matplotlib
+geopy
+xgboost
