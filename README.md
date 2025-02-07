@@ -1,4 +1,4 @@
-# UAViSec-A Simulation Platform for Intelligent UAV Cybersecurity Analysis
+# UAViSec-A Simulation Platform for Intelligent UAV Cybersecurity and Reliability Analysis
 
 Simulated UAV Attack with PX4 and QGroundControl.
 
