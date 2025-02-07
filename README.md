@@ -6,7 +6,7 @@ Demo Videos of UAV security simulation examples using this platform are availabl
 ## Setup
 The following steps are required in order to run the PX4 flight simulation software. This repository contains the code in order to collect data, run attacks, and run normal/attacked simulations with flight plans.
 1. Clone the repository
-    * https://github.com/loveyu917/UAV_platform
+    * https://github.com/ai-uavsec/UAViSec (this repo)
     * https://github.com/loveyu917/PX4-Autopilot
 
 2. Install and build PX4 Gazebo-Classic
