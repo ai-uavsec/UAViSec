@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/boyin/UAV_platform/px4/sensors/CommandMotorSpeed.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/CommandMotorSpeed.pb.cc
 CommandMotorSpeed.pb.h
-/home/boyin/UAV_platform/px4/sensors/CommandMotorSpeed.pb.h
+/home/boyin/UAViSec/spoofer/sensors/CommandMotorSpeed.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -28,9 +28,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/CommandMotorSpeed.pb.h
+/home/boyin/UAViSec/spoofer/sensors/CommandMotorSpeed.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -58,9 +58,9 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 
-/home/boyin/UAV_platform/px4/sensors/Groundtruth.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/Groundtruth.pb.cc
 Groundtruth.pb.h
-/home/boyin/UAV_platform/px4/sensors/Groundtruth.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Groundtruth.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -80,9 +80,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/Groundtruth.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Groundtruth.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -110,9 +110,9 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 
-/home/boyin/UAV_platform/px4/sensors/IRLock.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/IRLock.pb.cc
 IRLock.pb.h
-/home/boyin/UAV_platform/px4/sensors/IRLock.pb.h
+/home/boyin/UAViSec/spoofer/sensors/IRLock.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -132,9 +132,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/IRLock.pb.h
+/home/boyin/UAViSec/spoofer/sensors/IRLock.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -162,9 +162,9 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 
-/home/boyin/UAV_platform/px4/sensors/Imu.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/Imu.pb.cc
 Imu.pb.h
-/home/boyin/UAV_platform/px4/sensors/Imu.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Imu.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -184,9 +184,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/Imu.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Imu.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -214,13 +214,13 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 quaternion.pb.h
-/home/boyin/UAV_platform/px4/sensors/quaternion.pb.h
+/home/boyin/UAViSec/spoofer/sensors/quaternion.pb.h
 vector3d.pb.h
-/home/boyin/UAV_platform/px4/sensors/vector3d.pb.h
+/home/boyin/UAViSec/spoofer/sensors/vector3d.pb.h
 
-/home/boyin/UAV_platform/px4/sensors/Int32.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/Int32.pb.cc
 Int32.pb.h
-/home/boyin/UAV_platform/px4/sensors/Int32.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Int32.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -240,9 +240,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/Int32.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Int32.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -270,9 +270,9 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 
-/home/boyin/UAV_platform/px4/sensors/MagneticField.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/MagneticField.pb.cc
 MagneticField.pb.h
-/home/boyin/UAV_platform/px4/sensors/MagneticField.pb.h
+/home/boyin/UAViSec/spoofer/sensors/MagneticField.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -292,9 +292,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/MagneticField.pb.h
+/home/boyin/UAViSec/spoofer/sensors/MagneticField.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -322,11 +322,11 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 vector3d.pb.h
-/home/boyin/UAV_platform/px4/sensors/vector3d.pb.h
+/home/boyin/UAViSec/spoofer/sensors/vector3d.pb.h
 
-/home/boyin/UAV_platform/px4/sensors/Odometry.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/Odometry.pb.cc
 Odometry.pb.h
-/home/boyin/UAV_platform/px4/sensors/Odometry.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Odometry.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -346,9 +346,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/Odometry.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Odometry.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -376,13 +376,13 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 quaternion.pb.h
-/home/boyin/UAV_platform/px4/sensors/quaternion.pb.h
+/home/boyin/UAViSec/spoofer/sensors/quaternion.pb.h
 vector3d.pb.h
-/home/boyin/UAV_platform/px4/sensors/vector3d.pb.h
+/home/boyin/UAViSec/spoofer/sensors/vector3d.pb.h
 
-/home/boyin/UAV_platform/px4/sensors/OpticalFlow.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/OpticalFlow.pb.cc
 OpticalFlow.pb.h
-/home/boyin/UAV_platform/px4/sensors/OpticalFlow.pb.h
+/home/boyin/UAViSec/spoofer/sensors/OpticalFlow.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -402,9 +402,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/OpticalFlow.pb.h
+/home/boyin/UAViSec/spoofer/sensors/OpticalFlow.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -432,9 +432,9 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 
-/home/boyin/UAV_platform/px4/sensors/Pressure.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/Pressure.pb.cc
 Pressure.pb.h
-/home/boyin/UAV_platform/px4/sensors/Pressure.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Pressure.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -454,9 +454,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/Pressure.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Pressure.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -484,9 +484,9 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 
-/home/boyin/UAV_platform/px4/sensors/Range.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/Range.pb.cc
 Range.pb.h
-/home/boyin/UAV_platform/px4/sensors/Range.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Range.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -506,9 +506,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/Range.pb.h
+/home/boyin/UAViSec/spoofer/sensors/Range.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -536,11 +536,11 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 quaternion.pb.h
-/home/boyin/UAV_platform/px4/sensors/quaternion.pb.h
+/home/boyin/UAViSec/spoofer/sensors/quaternion.pb.h
 
-/home/boyin/UAV_platform/px4/sensors/SITLGps.pb.cc
+/home/boyin/UAViSec/spoofer/sensors/SITLGps.pb.cc
 SITLGps.pb.h
-/home/boyin/UAV_platform/px4/sensors/SITLGps.pb.h
+/home/boyin/UAViSec/spoofer/sensors/SITLGps.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -560,9 +560,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/boyin/UAV_platform/px4/sensors/third_party/protobuf/version.h
+/home/boyin/UAViSec/spoofer/sensors/third_party/protobuf/version.h
 
-/home/boyin/UAV_platform/px4/sensors/SITLGps.pb.h
+/home/boyin/UAViSec/spoofer/sensors/SITLGps.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -590,41 +590,7 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 
-/home/boyin/UAV_platform/px4/sensors/quaternion.pb.h
-string
--
-google/protobuf/stubs/common.h
--
-google/protobuf/io/coded_stream.h
--
-google/protobuf/arena.h
--
-google/protobuf/arenastring.h
--
-google/protobuf/generated_message_table_driven.h
--
-google/protobuf/generated_message_util.h
--
-google/protobuf/inlined_string_field.h
--
-google/protobuf/metadata.h
--
-google/protobuf/message.h
--
-google/protobuf/repeated_field.h
--
-google/protobuf/extension_set.h
--
-google/protobuf/unknown_field_set.h
--
-boost/shared_ptr.hpp
--
-gazebo/util/system.hh
--
-gazebo/msgs/MsgFactory.hh
-/home/boyin/UAV_platform/px4/sensors/gazebo/msgs/MsgFactory.hh
-
-/home/boyin/UAV_platform/px4/sensors/vector3d.pb.h
+/home/boyin/UAViSec/spoofer/sensors/quaternion.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -656,9 +622,43 @@ boost/shared_ptr.hpp
 gazebo/util/system.hh
 -
 gazebo/msgs/MsgFactory.hh
-/home/boyin/UAV_platform/px4/sensors/gazebo/msgs/MsgFactory.hh
+/home/boyin/UAViSec/spoofer/sensors/gazebo/msgs/MsgFactory.hh
 
-/home/boyin/UAV_platform/px4/spoofer.cc
+/home/boyin/UAViSec/spoofer/sensors/vector3d.pb.h
+string
+-
+google/protobuf/stubs/common.h
+-
+google/protobuf/io/coded_stream.h
+-
+google/protobuf/arena.h
+-
+google/protobuf/arenastring.h
+-
+google/protobuf/generated_message_table_driven.h
+-
+google/protobuf/generated_message_util.h
+-
+google/protobuf/inlined_string_field.h
+-
+google/protobuf/metadata.h
+-
+google/protobuf/message.h
+-
+google/protobuf/repeated_field.h
+-
+google/protobuf/extension_set.h
+-
+google/protobuf/unknown_field_set.h
+-
+boost/shared_ptr.hpp
+-
+gazebo/util/system.hh
+-
+gazebo/msgs/MsgFactory.hh
+/home/boyin/UAViSec/spoofer/sensors/gazebo/msgs/MsgFactory.hh
+
+/home/boyin/UAViSec/spoofer/spoofer.cc
 boost/shared_ptr.hpp
 -
 gazebo/transport/transport.hh

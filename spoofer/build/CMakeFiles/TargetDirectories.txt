@@ -1,3 +1,4 @@
-/home/boyin/UAV_platform/px4/build/CMakeFiles/rebuild_cache.dir
-/home/boyin/UAV_platform/px4/build/CMakeFiles/edit_cache.dir
-/home/boyin/UAV_platform/px4/build/CMakeFiles/spoofer.dir
+/home/boyin/UAViSec/spoofer/build/CMakeFiles/edit_cache.dir
+/home/boyin/UAViSec/spoofer/build/CMakeFiles/rebuild_cache.dir
+/home/boyin/UAViSec/spoofer/build/CMakeFiles/sensor_logger.dir
+/home/boyin/UAViSec/spoofer/build/CMakeFiles/spoofer.dir

@@ -48,24 +48,13 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/boyin/UAV_platform/px4
+CMAKE_SOURCE_DIR = /home/boyin/UAViSec/spoofer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/boyin/UAV_platform/px4/build
+CMAKE_BINARY_DIR = /home/boyin/UAViSec/spoofer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -78,11 +67,22 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/boyin/UAV_platform/px4/build/CMakeFiles /home/boyin/UAV_platform/px4/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/boyin/UAViSec/spoofer/build/CMakeFiles /home/boyin/UAViSec/spoofer/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/boyin/UAV_platform/px4/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/boyin/UAViSec/spoofer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named sensor_logger
+
+# Build rule for target.
+sensor_logger: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sensor_logger
+.PHONY : sensor_logger
+
+# fast build rule for target.
+sensor_logger/fast:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/build
+.PHONY : sensor_logger/fast
+
+#=============================================================================
 # Target rules for targets named spoofer
 
 # Build rule for target.
@@ -123,12 +136,40 @@ spoofer/fast:
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/build
 .PHONY : spoofer/fast
 
+sensor_logger.o: sensor_logger.cc.o
+
+.PHONY : sensor_logger.o
+
+# target to build an object file
+sensor_logger.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensor_logger.cc.o
+.PHONY : sensor_logger.cc.o
+
+sensor_logger.i: sensor_logger.cc.i
+
+.PHONY : sensor_logger.i
+
+# target to preprocess a source file
+sensor_logger.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensor_logger.cc.i
+.PHONY : sensor_logger.cc.i
+
+sensor_logger.s: sensor_logger.cc.s
+
+.PHONY : sensor_logger.s
+
+# target to generate assembly for a file
+sensor_logger.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensor_logger.cc.s
+.PHONY : sensor_logger.cc.s
+
 sensors/CommandMotorSpeed.pb.o: sensors/CommandMotorSpeed.pb.cc.o
 
 .PHONY : sensors/CommandMotorSpeed.pb.o
 
 # target to build an object file
 sensors/CommandMotorSpeed.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/CommandMotorSpeed.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.o
 .PHONY : sensors/CommandMotorSpeed.pb.cc.o
 
@@ -138,6 +179,7 @@ sensors/CommandMotorSpeed.pb.i: sensors/CommandMotorSpeed.pb.cc.i
 
 # target to preprocess a source file
 sensors/CommandMotorSpeed.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/CommandMotorSpeed.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.i
 .PHONY : sensors/CommandMotorSpeed.pb.cc.i
 
@@ -147,6 +189,7 @@ sensors/CommandMotorSpeed.pb.s: sensors/CommandMotorSpeed.pb.cc.s
 
 # target to generate assembly for a file
 sensors/CommandMotorSpeed.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/CommandMotorSpeed.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.s
 .PHONY : sensors/CommandMotorSpeed.pb.cc.s
 
@@ -156,6 +199,7 @@ sensors/Groundtruth.pb.o: sensors/Groundtruth.pb.cc.o
 
 # target to build an object file
 sensors/Groundtruth.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Groundtruth.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.o
 .PHONY : sensors/Groundtruth.pb.cc.o
 
@@ -165,6 +209,7 @@ sensors/Groundtruth.pb.i: sensors/Groundtruth.pb.cc.i
 
 # target to preprocess a source file
 sensors/Groundtruth.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Groundtruth.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.i
 .PHONY : sensors/Groundtruth.pb.cc.i
 
@@ -174,6 +219,7 @@ sensors/Groundtruth.pb.s: sensors/Groundtruth.pb.cc.s
 
 # target to generate assembly for a file
 sensors/Groundtruth.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Groundtruth.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.s
 .PHONY : sensors/Groundtruth.pb.cc.s
 
@@ -183,6 +229,7 @@ sensors/IRLock.pb.o: sensors/IRLock.pb.cc.o
 
 # target to build an object file
 sensors/IRLock.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/IRLock.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.o
 .PHONY : sensors/IRLock.pb.cc.o
 
@@ -192,6 +239,7 @@ sensors/IRLock.pb.i: sensors/IRLock.pb.cc.i
 
 # target to preprocess a source file
 sensors/IRLock.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/IRLock.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.i
 .PHONY : sensors/IRLock.pb.cc.i
 
@@ -201,6 +249,7 @@ sensors/IRLock.pb.s: sensors/IRLock.pb.cc.s
 
 # target to generate assembly for a file
 sensors/IRLock.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/IRLock.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.s
 .PHONY : sensors/IRLock.pb.cc.s
 
@@ -210,6 +259,7 @@ sensors/Imu.pb.o: sensors/Imu.pb.cc.o
 
 # target to build an object file
 sensors/Imu.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Imu.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.o
 .PHONY : sensors/Imu.pb.cc.o
 
@@ -219,6 +269,7 @@ sensors/Imu.pb.i: sensors/Imu.pb.cc.i
 
 # target to preprocess a source file
 sensors/Imu.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Imu.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.i
 .PHONY : sensors/Imu.pb.cc.i
 
@@ -228,6 +279,7 @@ sensors/Imu.pb.s: sensors/Imu.pb.cc.s
 
 # target to generate assembly for a file
 sensors/Imu.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Imu.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.s
 .PHONY : sensors/Imu.pb.cc.s
 
@@ -237,6 +289,7 @@ sensors/Int32.pb.o: sensors/Int32.pb.cc.o
 
 # target to build an object file
 sensors/Int32.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Int32.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.o
 .PHONY : sensors/Int32.pb.cc.o
 
@@ -246,6 +299,7 @@ sensors/Int32.pb.i: sensors/Int32.pb.cc.i
 
 # target to preprocess a source file
 sensors/Int32.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Int32.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.i
 .PHONY : sensors/Int32.pb.cc.i
 
@@ -255,6 +309,7 @@ sensors/Int32.pb.s: sensors/Int32.pb.cc.s
 
 # target to generate assembly for a file
 sensors/Int32.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Int32.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.s
 .PHONY : sensors/Int32.pb.cc.s
 
@@ -264,6 +319,7 @@ sensors/MagneticField.pb.o: sensors/MagneticField.pb.cc.o
 
 # target to build an object file
 sensors/MagneticField.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/MagneticField.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.o
 .PHONY : sensors/MagneticField.pb.cc.o
 
@@ -273,6 +329,7 @@ sensors/MagneticField.pb.i: sensors/MagneticField.pb.cc.i
 
 # target to preprocess a source file
 sensors/MagneticField.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/MagneticField.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.i
 .PHONY : sensors/MagneticField.pb.cc.i
 
@@ -282,6 +339,7 @@ sensors/MagneticField.pb.s: sensors/MagneticField.pb.cc.s
 
 # target to generate assembly for a file
 sensors/MagneticField.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/MagneticField.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.s
 .PHONY : sensors/MagneticField.pb.cc.s
 
@@ -291,6 +349,7 @@ sensors/Odometry.pb.o: sensors/Odometry.pb.cc.o
 
 # target to build an object file
 sensors/Odometry.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Odometry.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.o
 .PHONY : sensors/Odometry.pb.cc.o
 
@@ -300,6 +359,7 @@ sensors/Odometry.pb.i: sensors/Odometry.pb.cc.i
 
 # target to preprocess a source file
 sensors/Odometry.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Odometry.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.i
 .PHONY : sensors/Odometry.pb.cc.i
 
@@ -309,6 +369,7 @@ sensors/Odometry.pb.s: sensors/Odometry.pb.cc.s
 
 # target to generate assembly for a file
 sensors/Odometry.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Odometry.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.s
 .PHONY : sensors/Odometry.pb.cc.s
 
@@ -318,6 +379,7 @@ sensors/OpticalFlow.pb.o: sensors/OpticalFlow.pb.cc.o
 
 # target to build an object file
 sensors/OpticalFlow.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/OpticalFlow.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.o
 .PHONY : sensors/OpticalFlow.pb.cc.o
 
@@ -327,6 +389,7 @@ sensors/OpticalFlow.pb.i: sensors/OpticalFlow.pb.cc.i
 
 # target to preprocess a source file
 sensors/OpticalFlow.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/OpticalFlow.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.i
 .PHONY : sensors/OpticalFlow.pb.cc.i
 
@@ -336,6 +399,7 @@ sensors/OpticalFlow.pb.s: sensors/OpticalFlow.pb.cc.s
 
 # target to generate assembly for a file
 sensors/OpticalFlow.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/OpticalFlow.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.s
 .PHONY : sensors/OpticalFlow.pb.cc.s
 
@@ -345,6 +409,7 @@ sensors/Pressure.pb.o: sensors/Pressure.pb.cc.o
 
 # target to build an object file
 sensors/Pressure.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Pressure.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.o
 .PHONY : sensors/Pressure.pb.cc.o
 
@@ -354,6 +419,7 @@ sensors/Pressure.pb.i: sensors/Pressure.pb.cc.i
 
 # target to preprocess a source file
 sensors/Pressure.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Pressure.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.i
 .PHONY : sensors/Pressure.pb.cc.i
 
@@ -363,6 +429,7 @@ sensors/Pressure.pb.s: sensors/Pressure.pb.cc.s
 
 # target to generate assembly for a file
 sensors/Pressure.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Pressure.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.s
 .PHONY : sensors/Pressure.pb.cc.s
 
@@ -372,6 +439,7 @@ sensors/Range.pb.o: sensors/Range.pb.cc.o
 
 # target to build an object file
 sensors/Range.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Range.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Range.pb.cc.o
 .PHONY : sensors/Range.pb.cc.o
 
@@ -381,6 +449,7 @@ sensors/Range.pb.i: sensors/Range.pb.cc.i
 
 # target to preprocess a source file
 sensors/Range.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Range.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Range.pb.cc.i
 .PHONY : sensors/Range.pb.cc.i
 
@@ -390,6 +459,7 @@ sensors/Range.pb.s: sensors/Range.pb.cc.s
 
 # target to generate assembly for a file
 sensors/Range.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/Range.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/Range.pb.cc.s
 .PHONY : sensors/Range.pb.cc.s
 
@@ -399,6 +469,7 @@ sensors/SITLGps.pb.o: sensors/SITLGps.pb.cc.o
 
 # target to build an object file
 sensors/SITLGps.pb.cc.o:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/SITLGps.pb.cc.o
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.o
 .PHONY : sensors/SITLGps.pb.cc.o
 
@@ -408,6 +479,7 @@ sensors/SITLGps.pb.i: sensors/SITLGps.pb.cc.i
 
 # target to preprocess a source file
 sensors/SITLGps.pb.cc.i:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/SITLGps.pb.cc.i
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.i
 .PHONY : sensors/SITLGps.pb.cc.i
 
@@ -417,6 +489,7 @@ sensors/SITLGps.pb.s: sensors/SITLGps.pb.cc.s
 
 # target to generate assembly for a file
 sensors/SITLGps.pb.cc.s:
+	$(MAKE) -f CMakeFiles/sensor_logger.dir/build.make CMakeFiles/sensor_logger.dir/sensors/SITLGps.pb.cc.s
 	$(MAKE) -f CMakeFiles/spoofer.dir/build.make CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.s
 .PHONY : sensors/SITLGps.pb.cc.s
 
@@ -453,9 +526,13 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... rebuild_cache"
+	@echo "... sensor_logger"
 	@echo "... spoofer"
+	@echo "... sensor_logger.o"
+	@echo "... sensor_logger.i"
+	@echo "... sensor_logger.s"
 	@echo "... sensors/CommandMotorSpeed.pb.o"
 	@echo "... sensors/CommandMotorSpeed.pb.i"
 	@echo "... sensors/CommandMotorSpeed.pb.s"

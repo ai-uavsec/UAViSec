@@ -49,11 +49,14 @@ void OnLidarSIgnal(Message &_msg)
   double signal_ = _msg->x();
   float distance = _msg->y();
   if(signal_==1.0){
-    LidarAttack=!LidarAttack;
+    LidarAttack=true;}
+  else if(signal_==0.0){
+    LidarAttack=false;
+  }
   if(LidarAttack){
     update_distance=distance;
   }
-  }
+
 
 }
 /////////////////////////////////////////////////
