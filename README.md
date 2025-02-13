@@ -14,7 +14,7 @@ The following steps are required in order to run the PX4 flight simulation softw
 3. Install QGroundControl
 	* http://qgroundcontrol.com/
 4. Replace Plugins and build PX4 Tools
-	1. Place `/bin/*` into `Tools/simulation/gazebo-classic/sitl_gazebo-classic/src` to overwrite the default SITL-Gazebo-Classic plugins.
+	1. Place `/bin/*` into `Tools/simulation/gazebo-classic/sitl_gazebo-classic/` to overwrite the default SITL-Gazebo-Classic plugins.
  	2. Place `/px4/*` into `src/modules/simulation/simulator_mavlink/` to overwrite the px4_simulation file.
 	3.  Rebuild the PX4-Autopilot software
     ```console
