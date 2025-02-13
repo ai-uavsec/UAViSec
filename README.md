@@ -21,9 +21,9 @@ The following steps are required in order to run the PX4 flight simulation softw
 	  make px4_sitl gazebo-classic
 	  ```
   Alternatively, the `install.sh` script can be used to perform these actions.
-    ```
+    ```console
       chmod +x install.sh
-      ./install.sh
+      ./install.sh <PX4 root directory>
     ```
 	  4. Build tools
 	  ```console

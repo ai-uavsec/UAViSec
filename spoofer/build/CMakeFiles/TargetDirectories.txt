@@ -1,3 +1,0 @@
-/home/frog/UAViSec/spoofer/build/CMakeFiles/rebuild_cache.dir
-/home/frog/UAViSec/spoofer/build/CMakeFiles/edit_cache.dir
-/home/frog/UAViSec/spoofer/build/CMakeFiles/spoofer.dir
