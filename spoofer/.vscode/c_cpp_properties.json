@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/gazebo-11",
+                "/usr/include/ignition/math6",
+                "/usr/include/sdformat-9.10",
+                "/usr/include/ignition/fuel_tools4",
+                "/usr/include/ignition/common3",
+                "/usr/include/ignition/msgs5"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}

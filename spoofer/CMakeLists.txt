@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
 
 find_package(gazebo REQUIRED)
+find_package(Boost REQUIRED)
 
 FILE(GLOB SENSOR_INCLUDE "sensors/*.cc")
 

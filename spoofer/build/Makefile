@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/boyin/UAV_platform/px4
+CMAKE_SOURCE_DIR = /home/frog/UAViSec/spoofer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/boyin/UAV_platform/px4/build
+CMAKE_BINARY_DIR = /home/frog/UAViSec/spoofer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/boyin/UAV_platform/px4/build/CMakeFiles /home/boyin/UAV_platform/px4/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/frog/UAViSec/spoofer/build/CMakeFiles /home/frog/UAViSec/spoofer/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/boyin/UAV_platform/px4/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/frog/UAViSec/spoofer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

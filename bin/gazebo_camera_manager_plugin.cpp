@@ -586,7 +586,8 @@ void CameraManagerPlugin::_handle_camera_info(const mavlink_message_t *pMsg, str
         camera_capabilities,       // CAP_FLAGS
         0,                         // Camera Definition Version
         uri,                       // URI
-        0                          // uint8_t gimbal_device_id
+        0,                         // uint8_t gimbal_device_id
+	0                          // uint8_t camera_device_id
     );
     _send_mavlink_message(&msg, srcaddr);
 }
@@ -613,7 +614,8 @@ void CameraManagerPlugin::_handle_request_camera_settings(const mavlink_message_
         0,                      // time_boot_ms
         _mode,                  // Camera Mode
         1.0E2 * (_zoom - 1.0)/ (_maxZoom - 1.0),                    // Zoom level
-        NAN);                   // Focus level
+        NAN,
+	0);                   // Focus level
     _send_mavlink_message(&msg, srcaddr);
 }
 
@@ -644,7 +646,8 @@ void CameraManagerPlugin::_handle_request_video_stream_status(const mavlink_mess
         _height,                                                // Vertical resolution
         2048,                                                   // Bit rate (made up)
         0,                                                      // Rotation (none)
-        90                                                      // FOV (made up)
+        90,                                                      // FOV (made up)
+	0							// ???
     );
     _send_mavlink_message(&msg, srcaddr);
 }
@@ -683,7 +686,9 @@ void CameraManagerPlugin::_handle_request_video_stream_information(const mavlink
         0,                                          // Rotation (none)
         90,                                         // FOV (made up)
         name,
-        _videoURI.c_str()
+        _videoURI.c_str(),
+	0,
+	0
     );
     _send_mavlink_message(&msg, srcaddr);
 }
@@ -747,7 +752,8 @@ void CameraManagerPlugin::_send_capture_status(struct sockaddr* srcaddr)
         interval,                               // image interval
         0,                                      // recording time in ms
         available_mib,                          // available storage capacity
-        _imageCounter);                         // total number of images
+        _imageCounter,
+	0);                         // total number of images
     _send_mavlink_message(&msg, srcaddr);
 }
 

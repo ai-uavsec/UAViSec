@@ -60,12 +60,12 @@ void OnMagSignal(Message &_msg)
   double y_signal = _msg->z();
   if(signal_==1.0){
     magnet_attack=!magnet_attack;
-    if(x_signal == 1.0 && magnet_attack)
-      x_scale = -1.0;
+    if(magnet_attack)
+      x_scale = x_signal;
     else
       x_scale = 1.0;
-    if(y_signal == 1.0 && magnet_attack)
-      y_scale = -1.0;
+    if(magnet_attack)
+      y_scale = y_signal;
     else
       y_scale= 1.0;
   }
@@ -157,7 +157,7 @@ void MagnetometerPlugin::Load(physics::ModelPtr model, sdf::ElementPtr sdf)
 
   pub_mag_ = node_handle_->Advertise<sensor_msgs::msgs::MagneticField>("~/" + model_->GetName() + mag_topic_, 10);
   gt_sub_ = node_handle_->Subscribe("~/" + model_->GetName() + gt_sub_topic_, &MagnetometerPlugin::GroundtruthCallback, this);
-  // maglistener = node_handle_->Subscribe("~/attack/mag",OnMagSignal,this);
+  maglistener = node_handle_->Subscribe("~/attack/mag",&OnMagSignal,this);
 
   standard_normal_distribution_ = std::normal_distribution<double>(0.0, 1.0);
 
@@ -250,8 +250,8 @@ void MagnetometerPlugin::OnUpdate(const common::UpdateInfo&)
     magnetic_field->set_y(measured_mag[1] );
     magnetic_field->set_z(measured_mag[2]);
     if (magnet_attack){
-        magnetic_field->set_x(measured_mag[0] * x_scale);
-        magnetic_field->set_y(measured_mag[1] * y_scale);
+        magnetic_field->set_x(measured_mag[0] + x_scale);
+        magnetic_field->set_y(measured_mag[1] + y_scale);
     }
     if(swap_attack)
     {

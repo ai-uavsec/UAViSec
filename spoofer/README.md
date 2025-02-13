@@ -1,12 +1,14 @@
-# UAV Security Platform
+# UAViSec-A Simulation Platform for Intelligent UAV Cybersecurity and Reliability Analysis
 
-Simulated UAV attack with PX4 and QGroundControl.
+Demo Videos of UAV security simulation examples using this platform are available at: https://www.youtube.com/@uavisec/videos
 
 
 ## Setup
 The following steps are required in order to run the PX4 flight simulation software. This repository contains the code in order to collect data, run attacks, and run normal/attacked simulations with flight plans.
 1. Clone the repository
-    * https://github.com/loveyu917/UAV_platform
+    * https://github.com/ai-uavsec/UAViSec (this repo)
+    * https://github.com/PX4/PX4-Autopilot
+
 2. Install and build PX4 Gazebo-Classic
 	* https://docs.px4.io/main/en/sim_gazebo_classic/
 3. Install QGroundControl
@@ -88,18 +90,18 @@ These following tools are located within the `CLONED_REPOSITORY/spoofer/build` d
 
       <option> :
         1 : attack input On/Off.
-        2 : disable all the motors.
+        2 : disable all the motor
         0 : stop the attack
 
       <index>  : index of the motors
 
       <thrust speed> : 0 ~ max thrust speed = 1450.
 
-      e.x.: ./spoofer -motor 1 0 500      //start attack the #0 motor with speed 500.
-      	    ./spoofer -motor 2 0 500      //make all the motors speed to 0.
+      e.x.: ./spoofer -motor 1 0 500      	  //start the attack the #0 motor with speed 500.
+            ./spoofer -motor 2 0 0      	  //make all the motor speed to 0
       ```
     * **Magnetometer Spoof**\
-      Change the Magnetometer Attack parameters to change the amount of the magnetometer. Swap the x, y axis of the Magnetic field data
+      Change the Magnetometer attack parameters to change the amount of the magnetometer. Swap the x, y axis of the Magnetic field data
 
       ```console
       ./spoofer -mag <option:int>
@@ -128,26 +130,27 @@ These following tools are located within the `CLONED_REPOSITORY/spoofer/build` d
       <distance_offset>: the distance sensor has a range of [0.02,5.0] m. The sonar distance sensor only reflect the object within its max distance. If there
       is nothing, the current distance equals to the max distance.
       ```
+
     * **Barometer Offset**\
-      Change the altitude attack parameters to change the offset by a particular absolute altitude and then it will auto change the absolute pressure and the temperature data computed by the new altitude.
+      Change the altitude Attack parameters to change the offset by a particular absolute altitude and then it will auto change the absolute pressure and the temperature data computed by the new altitude.
 
       ```console
       ./spoofer -baro <option:int> <offset : double>
+
       <option>:  1: Attack On/Off
       <offset>:   the offset data you want the sensor make.
-      ```
 * **Custom usage tips**\
-  	When use the camera test, you should use the Typhoon-h480 model with world you like, such as ksql_airport.world.
-  	To use the camera and stream, you need to enable the video in QGroundControl. You can follow this link to set up stream in QGroundControl.
+  	When using the camera test, you should use the Typhoon-h480 model with world you like, such as ksql_airport.world.
+  	To use the camera and stream, you need to enable video in QGroundControl. You can follow this link to set up stream in QGroundControl.
       * https://docs.px4.io/main/en/sim_gazebo_classic/#how-to-view-gazebo-video
 
   	``` console
    	make px4_sitl gazebo-classic_typhoon_h480__ksql_airport
    	```
-   	Test the lidar distance sensor attack, you can also use the Typhoon-h480 modle. It contains a forward face sonar.
+   	Test the lidar distance sensor attack, you can use the iris_irlock module. It contains a downward depth camera.
   	```console
-   	make px4_sitl gazebo-classic_typhoon_h480
+   	make px4_sitl gazebo-classic_iris_irlock
    	```
    	After the attack, you can obverse the data changing in the QGroundControl-> Analyze Tools -> MAVLink Inspector: Distance Sensor
-
+  
 

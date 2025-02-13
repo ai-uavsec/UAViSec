@@ -49,6 +49,8 @@ GZ_REGISTER_MODEL_PLUGIN(BarometerPlugin)
 bool BaroAttack=false;
 bool BaroAttack_=false;
 float scale= 0.0;
+double temperature_modifier = 0.0;
+double pressure_modifier = 0.0;
 typedef const boost::shared_ptr<const msgs::Vector3d> Message;
 
 // transport
@@ -58,12 +60,14 @@ void OnBaroSignal(Message &_msg)
 {
   // bool BaroAttack=false;
   double signal_ = _msg->x();
-  float scale = _msg->y();
+  temperature_modifier = _msg->y();
+  pressure_modifier = _msg->z();
+  // BaroAttack=!BaroAttack;
   if(signal_==1.0){
     BaroAttack=true;
   }
   else if(signal_ == 2.0){
-    BaroAttack_=true;
+    BaroAttack=false;
   }
   }
 
@@ -145,7 +149,7 @@ void BarometerPlugin::Load(physics::ModelPtr model, sdf::ElementPtr sdf)
       boost::bind(&BarometerPlugin::OnUpdate, this, _1));
 
   pub_baro_ = node_handle_->Advertise<sensor_msgs::msgs::Pressure>("~/" + model_->GetName() + baro_topic_, 10);
-  barolistener = node_handle_->Subscribe("~/attack/baro",OnBaroSignal,this);
+  barolistener = node_handle_->Subscribe("~/attack/baro",&OnBaroSignal,this);
 
 
   standard_normal_distribution_ = std::normal_distribution<double>(0.0, 1.0);
@@ -213,6 +217,9 @@ void BarometerPlugin::OnUpdate(const common::UpdateInfo&)
     // convert to hPa
     const float absolute_pressure_noisy_hpa = absolute_pressure_noisy * 0.01f;
     baro_msg_.set_absolute_pressure(absolute_pressure_noisy_hpa);
+    if (BaroAttack) {
+	baro_msg_.set_absolute_pressure(absolute_pressure_noisy_hpa);
+    }
 
     // calculate air density at local temperature
     const float density_ratio = powf(TEMPERATURE_MSL / temperature_local , 4.256f);
@@ -223,14 +230,21 @@ void BarometerPlugin::OnUpdate(const common::UpdateInfo&)
     // const float pressure_altitude=  alt_amsl -
     //                                 (abs_pressure_noise + baro_drift_pa_) /
     //                                     (gravity_in_world_.Length() * air_density);
+    double local_pressure_modifier = BaroAttack ? pressure_modifier : 0.0;
     baro_msg_.set_pressure_altitude(alt_amsl -
                                     (abs_pressure_noise + baro_drift_pa_) /
                                         (gravity_in_world_.Length() * air_density));
+
+    /*if (BaroAttack) {
+	baro_msg_.set_pressure_altitude(0);
+    }*/
+
     // baro_msg_.set_pressure_altitude( pressure_altitude );
 
     // calculate temperature in Celsius
     // baro_msg_.set_temperature((temperature_local + ABSOLUTE_ZERO_C) * scale);
-    baro_msg_.set_temperature(temperature_local + ABSOLUTE_ZERO_C);
+    double local_temperature_modifier = BaroAttack ? temperature_modifier : 0.0;
+    baro_msg_.set_temperature(temperature_local + local_temperature_modifier + ABSOLUTE_ZERO_C);
 
     // Fill baro msg
     baro_msg_.set_time_usec(current_time.Double() * 1e6);

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/boyin/UAV_platform/px4
+CMAKE_SOURCE_DIR = /home/frog/UAViSec/spoofer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/boyin/UAV_platform/px4/build
+CMAKE_BINARY_DIR = /home/frog/UAViSec/spoofer/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/spoofer.dir/depend.make
@@ -59,159 +59,159 @@ include CMakeFiles/spoofer.dir/flags.make
 
 CMakeFiles/spoofer.dir/spoofer.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/spoofer.cc.o: ../spoofer.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/spoofer.dir/spoofer.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/spoofer.cc.o -c /home/boyin/UAV_platform/px4/spoofer.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/spoofer.dir/spoofer.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/spoofer.cc.o -c /home/frog/UAViSec/spoofer/spoofer.cc
 
 CMakeFiles/spoofer.dir/spoofer.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/spoofer.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/spoofer.cc > CMakeFiles/spoofer.dir/spoofer.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/spoofer.cc > CMakeFiles/spoofer.dir/spoofer.cc.i
 
 CMakeFiles/spoofer.dir/spoofer.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/spoofer.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/spoofer.cc -o CMakeFiles/spoofer.dir/spoofer.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/spoofer.cc -o CMakeFiles/spoofer.dir/spoofer.cc.s
 
 CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.o: ../sensors/CommandMotorSpeed.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/CommandMotorSpeed.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/CommandMotorSpeed.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/CommandMotorSpeed.pb.cc > CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/CommandMotorSpeed.pb.cc > CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/CommandMotorSpeed.pb.cc -o CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/CommandMotorSpeed.pb.cc -o CMakeFiles/spoofer.dir/sensors/CommandMotorSpeed.pb.cc.s
 
 CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.o: ../sensors/Groundtruth.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/Groundtruth.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/Groundtruth.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/Groundtruth.pb.cc > CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/Groundtruth.pb.cc > CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/Groundtruth.pb.cc -o CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/Groundtruth.pb.cc -o CMakeFiles/spoofer.dir/sensors/Groundtruth.pb.cc.s
 
 CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.o: ../sensors/IRLock.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/IRLock.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/IRLock.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/IRLock.pb.cc > CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/IRLock.pb.cc > CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/IRLock.pb.cc -o CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/IRLock.pb.cc -o CMakeFiles/spoofer.dir/sensors/IRLock.pb.cc.s
 
 CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.o: ../sensors/Imu.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/Imu.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/Imu.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/Imu.pb.cc > CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/Imu.pb.cc > CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/Imu.pb.cc -o CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/Imu.pb.cc -o CMakeFiles/spoofer.dir/sensors/Imu.pb.cc.s
 
 CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.o: ../sensors/Int32.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/Int32.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/Int32.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/Int32.pb.cc > CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/Int32.pb.cc > CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/Int32.pb.cc -o CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/Int32.pb.cc -o CMakeFiles/spoofer.dir/sensors/Int32.pb.cc.s
 
 CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.o: ../sensors/MagneticField.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/MagneticField.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/MagneticField.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/MagneticField.pb.cc > CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/MagneticField.pb.cc > CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/MagneticField.pb.cc -o CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/MagneticField.pb.cc -o CMakeFiles/spoofer.dir/sensors/MagneticField.pb.cc.s
 
 CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.o: ../sensors/Odometry.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/Odometry.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/Odometry.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/Odometry.pb.cc > CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/Odometry.pb.cc > CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/Odometry.pb.cc -o CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/Odometry.pb.cc -o CMakeFiles/spoofer.dir/sensors/Odometry.pb.cc.s
 
 CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.o: ../sensors/OpticalFlow.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/OpticalFlow.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/OpticalFlow.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/OpticalFlow.pb.cc > CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/OpticalFlow.pb.cc > CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/OpticalFlow.pb.cc -o CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/OpticalFlow.pb.cc -o CMakeFiles/spoofer.dir/sensors/OpticalFlow.pb.cc.s
 
 CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.o: ../sensors/Pressure.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/Pressure.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/Pressure.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/Pressure.pb.cc > CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/Pressure.pb.cc > CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/Pressure.pb.cc -o CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/Pressure.pb.cc -o CMakeFiles/spoofer.dir/sensors/Pressure.pb.cc.s
 
 CMakeFiles/spoofer.dir/sensors/Range.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/Range.pb.cc.o: ../sensors/Range.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/spoofer.dir/sensors/Range.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Range.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/Range.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/spoofer.dir/sensors/Range.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/Range.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/Range.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/Range.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/Range.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/Range.pb.cc > CMakeFiles/spoofer.dir/sensors/Range.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/Range.pb.cc > CMakeFiles/spoofer.dir/sensors/Range.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/Range.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/Range.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/Range.pb.cc -o CMakeFiles/spoofer.dir/sensors/Range.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/Range.pb.cc -o CMakeFiles/spoofer.dir/sensors/Range.pb.cc.s
 
 CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.o: CMakeFiles/spoofer.dir/flags.make
 CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.o: ../sensors/SITLGps.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.o -c /home/boyin/UAV_platform/px4/sensors/SITLGps.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.o -c /home/frog/UAViSec/spoofer/sensors/SITLGps.pb.cc
 
 CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/boyin/UAV_platform/px4/sensors/SITLGps.pb.cc > CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frog/UAViSec/spoofer/sensors/SITLGps.pb.cc > CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.i
 
 CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/boyin/UAV_platform/px4/sensors/SITLGps.pb.cc -o CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frog/UAViSec/spoofer/sensors/SITLGps.pb.cc -o CMakeFiles/spoofer.dir/sensors/SITLGps.pb.cc.s
 
 # Object files for target spoofer
 spoofer_OBJECTS = \
@@ -268,13 +268,13 @@ spoofer: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
 spoofer: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0
 spoofer: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
 spoofer: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-spoofer: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.10.0
+spoofer: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.10.1
 spoofer: /usr/lib/x86_64-linux-gnu/libOgreMain.so
 spoofer: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
 spoofer: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
 spoofer: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
 spoofer: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
-spoofer: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.16.0
+spoofer: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.17.0
 spoofer: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
 spoofer: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
 spoofer: /usr/lib/x86_64-linux-gnu/libblas.so
@@ -288,16 +288,16 @@ spoofer: /usr/lib/x86_64-linux-gnu/libassimp.so
 spoofer: /usr/lib/x86_64-linux-gnu/liboctomap.so.1.9.3
 spoofer: /usr/lib/x86_64-linux-gnu/liboctomath.so.1.9.3
 spoofer: /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.71.0
-spoofer: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.4.0
-spoofer: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.9.0
+spoofer: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.5.0
+spoofer: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.9.1
 spoofer: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.11.0
-spoofer: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.15.0
+spoofer: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.15.1
 spoofer: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-spoofer: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.16.0
+spoofer: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.17.0
 spoofer: /usr/lib/x86_64-linux-gnu/libuuid.so
 spoofer: /usr/lib/x86_64-linux-gnu/libuuid.so
 spoofer: CMakeFiles/spoofer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/boyin/UAV_platform/px4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable spoofer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/frog/UAViSec/spoofer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable spoofer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/spoofer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -310,6 +310,6 @@ CMakeFiles/spoofer.dir/clean:
 .PHONY : CMakeFiles/spoofer.dir/clean
 
 CMakeFiles/spoofer.dir/depend:
-	cd /home/boyin/UAV_platform/px4/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/boyin/UAV_platform/px4 /home/boyin/UAV_platform/px4 /home/boyin/UAV_platform/px4/build /home/boyin/UAV_platform/px4/build /home/boyin/UAV_platform/px4/build/CMakeFiles/spoofer.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/frog/UAViSec/spoofer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/frog/UAViSec/spoofer /home/frog/UAViSec/spoofer /home/frog/UAViSec/spoofer/build /home/frog/UAViSec/spoofer/build /home/frog/UAViSec/spoofer/build/CMakeFiles/spoofer.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/spoofer.dir/depend
 

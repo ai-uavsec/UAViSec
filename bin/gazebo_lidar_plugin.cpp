@@ -157,7 +157,7 @@ void LidarPlugin::Load(sensors::SensorPtr _parent, sdf::ElementPtr _sdf)
 
   // start lidar topic publishing
   lidar_pub_ = node_handle_->Advertise<sensor_msgs::msgs::Range>("~/" + names_splitted[0] + "/link/" + lidar_topic_, 10);
-  lidar_listener = node_handle_->Subscribe("~/attack/lidar",OnLidarSIgnal,this);
+  lidar_listener = node_handle_->Subscribe("~/attack/lidar", OnLidarSIgnal, this);
 }
 
 /////////////////////////////////////////////////

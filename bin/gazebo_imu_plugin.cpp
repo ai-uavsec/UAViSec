@@ -36,6 +36,7 @@ bool imuAttack=false;
 bool imu_zero=false;
 float attack_increment[6] = {0,0,0,0,0,0};
 float temp_increment[6] = {0,0,0,0,0,0};
+double x_increment = 0.0;
 typedef const boost::shared_ptr<const msgs::Vector3d> Message;
 transport::PublisherPtr imu_data_pub_;
 
@@ -46,10 +47,11 @@ void OnImuSIgnal(Message &_msg)
 {
   // bool imuAttack=false;
   double signal_ = _msg->x();
-  int n = _msg->y();
+  int n = (int) _msg->y();
   double ins= _msg->z();
   if(signal_==1.0){
     imuAttack=true;
+    x_increment = ins;
     }
   else if(signal_==2.0){
     imu_zero=!imu_zero;
@@ -345,13 +347,26 @@ void GazeboImuPlugin::OnUpdate(const common::UpdateInfo& _info) {
     }
 
 
-    if(!imuAttack)
-      memset(attack_increment,0,sizeof(attack_increment));
+    /*if(!imuAttack)
+      memset(attack_increment,0,sizeof(attack_increment));*/
+
       // Copy Eigen::Vector3d to gazebo::msgs::Vector3d
     gazebo::msgs::Vector3d* linear_acceleration = new gazebo::msgs::Vector3d();
-    linear_acceleration->set_x(linear_acceleration_I[0]+ attack_increment[0]);
-    linear_acceleration->set_y(linear_acceleration_I[1]+ attack_increment[1]);
-    linear_acceleration->set_z(linear_acceleration_I[2]+ attack_increment[2]);
+    double x_bias = 0;
+    double y_bias = 0;
+    double z_bias = 0;
+    if (imuAttack) {
+	x_bias = 20;
+	y_bias = 0;
+	z_bias = 0;
+    } else {
+	x_bias = 0;
+	y_bias = 0;
+	z_bias = 0;
+    }
+    linear_acceleration->set_x(linear_acceleration_I[0]+ attack_increment[0] + x_bias);
+    linear_acceleration->set_y(linear_acceleration_I[1]+ attack_increment[1] + y_bias);
+    linear_acceleration->set_z(linear_acceleration_I[2]+ attack_increment[2] + z_bias);
 
     // Copy Eigen::Vector3d to gazebo::msgs::Vector3d
     gazebo::msgs::Vector3d* angular_velocity = new gazebo::msgs::Vector3d();
