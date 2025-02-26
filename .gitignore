@@ -32,6 +32,8 @@
 *.app
 
 # Local files
+./DS_STORE
 ./spoofer/.vscode
 ./spoofer/build/
 ./spoofer/imgui
+./spoofer/.DS_STORE
