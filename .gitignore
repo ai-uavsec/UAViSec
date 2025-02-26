@@ -34,3 +34,4 @@
 # Local files
 ./spoofer/.vscode
 ./spoofer/build/
+./spoofer/imgui

@@ -25,7 +25,12 @@ The following steps are required in order to run the PX4 flight simulation softw
       chmod +x install.sh
       ./install.sh <PX4 root directory>
     ```
-	  4. Build tools
+  4. Clone ImGui
+    ```console
+      cd spoofer
+      git clone https://github.com/ocornut/imgui.git
+    ```
+	5. Build tools
 	  ```console
 	  cd CLONED_REPOSITORY/spoofer
 	  chmod +x ./build.sh

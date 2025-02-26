@@ -6,330 +6,319 @@
 #include <iostream>
 #include <boost/program_options.hpp>
 
+// ImGui includes
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+#include <GLFW/glfw3.h>
+
 namespace po = boost::program_options;
 
+gazebo::transport::NodePtr node;
+
 void fill_data(gazebo::msgs::Vector3d *data, std::vector<double> fill) {
-	int size = fill.size();
-  data->set_y(0.0);
-  data->set_z(0.0);
-	if (size > 0) {
-		data->set_x(fill[0]);
-		std::cout << "X: " << fill[0] << "\n";
-	}
-	if (size > 1) {
-		data->set_y(fill[1]);
-		std::cout << "Y: " << fill[1] << "\n";
-	}
-	if (size > 2) {
-		data->set_z(fill[2]);
-		std::cout << "Z: " << fill[2] << "\n";
-	}
+    int size = fill.size();
+    data->set_y(0.0);
+    data->set_z(0.0);
+    if (size > 0) {
+        data->set_x(fill[0]);
+        std::cout << "X: " << fill[0] << "\n";
+    }
+    if (size > 1) {
+        data->set_y(fill[1]);
+        std::cout << "Y: " << fill[1] << "\n";
+    }
+    if (size > 2) {
+        data->set_z(fill[2]);
+        std::cout << "Z: " << fill[2] << "\n";
+    }
 }
 
-// 0.0001 = 36 feet
-// 0.00001 = 3.6 feet
-// 0.000001 = 4 inches
-int main(int _argc, char **_argv)
-{
-
-  po::options_description desc("Allowed options");
-  desc.add_options()
-	  ("abs", po::value<std::vector<double>>()->multitoken(), "Absolute GPS offset")
-	  ("rot", po::value<std::vector<double>>()->multitoken(), "Rotational offset")
-	  ("imu", po::value<std::vector<double>>()->multitoken(), "IMU offset")
-    ("lidar", po::value<std::vector<double>>()->multitoken(), "Lidar offset")
-    ("sonar", po::value<std::vector<double>>()->multitoken(), "Sonar offset")
-    ("baro", po::value<std::vector<double>>()->multitoken(), "Barometer offset")
-    ("mag", po::value<std::vector<double>>()->multitoken(), "Magnetometer offset")
-    ("camera", po::value<double>()->multitoken(), "Camera")
-    ("stream", po::value<double>()->multitoken(), "Stream")
-    ("motor", po::value<std::vector<double>>()->multitoken(), "Motor")
-    ("wind", po::value<std::vector<double>>()->multitoken(), "Toggle wind attack");
-
-  po::positional_options_description p;
-  p.add("abs", 3);
-  p.add("rot", 2);
-  p.add("imu", 3);
-  p.add("sonar", 2);
-  p.add("baro", 3);
-  p.add("wind", 3);
-  p.add("mag", 3);
-  p.add("lidar", 3);
-  po::variables_map vm;
-  po::store(po::command_line_parser(_argc, _argv)
-		  .options(desc)
-		  .positional(p)
-		  .run(), vm);
-  po::notify(vm);
-
-  // Initialize Gazebo
-  gazebo::client::setup();
-  gazebo::transport::NodePtr node(new gazebo::transport::Node());
-  node->Init();
-
-  // gazebo::msgs::Vector3d data;
-
-  if (vm.count("abs")) {
-	  /*std::vector<double> offsets = vm["abs"].as<std::vector<double>>();
-	  gazebo::msgs::Vector3d gps_data;
-	  fill_data(&gps_data, offsets);
-	  gazebo::transport::PublisherPtr gps_pub = node->Advertise<gazebo::msgs::Vector3d>("~/attack/gps", 10);
-	  gps_pub->WaitForConnection();
-	  gps_pub->Publish(gps_data);*/
-  }
-
-  if (vm.count("rot")) {
-	  std::vector<double> offsets = vm["rot"].as<std::vector<double>>();
-	  gazebo::msgs::Vector3d rot_data;
-	  fill_data(&rot_data, offsets);
-	  gazebo::transport::PublisherPtr rot_pub = node->Advertise<gazebo::msgs::Vector3d>("~/attack/gps", 10);
-	  rot_pub->WaitForConnection();
-	  rot_pub->Publish(rot_data);
-  }
-
-  if (vm.count("imu")) {
-    std::cout << "IMU";
-    std::vector<double> offsets = vm["imu"].as<std::vector<double>>();
-    gazebo::transport::PublisherPtr gps_pub=node->Advertise<gazebo::msgs::Vector3d>("~/attack/imu",10);
-
+void publishSensorAttack(const std::string& topic, const std::vector<double>& values) {
+    gazebo::transport::PublisherPtr pub = node->Advertise<gazebo::msgs::Vector3d>(topic, 10);
     gazebo::msgs::Vector3d data;
-    fill_data(&data, offsets);
+    fill_data(&data, values);
+    pub->WaitForConnection();
+    pub->Publish(data);
+}
 
-    gps_pub->WaitForConnection();
-    gps_pub->Publish(data);
-  }
-
-  if (vm.count("lidar")) {
-    std::vector<double> offsets = vm["lidar"].as<std::vector<double>>();
-    gazebo::transport::PublisherPtr lidar_pub=node->Advertise<gazebo::msgs::Vector3d>("~/attack/lidar",10);
-
-    gazebo::msgs::Vector3d lidar_data;
-    fill_data(&lidar_data, offsets);
-
-      // gazebo::msgs::Any data;
-      // data=gazebo::msgs::ConvertAny(atof(_argv[2]));
-      
-  
-    lidar_pub->WaitForConnection();
-    lidar_pub->Publish(lidar_data);
-  }
-
-  if (vm.count("sonar")) {
-    std::vector<double> offsets = vm["sonar"].as<std::vector<double>>();
-    gazebo::transport::PublisherPtr gps_pub=node->Advertise<gazebo::msgs::Vector3d>("~/attack/sonar",10);
-
-    gazebo::msgs::Vector3d data;
-    fill_data(&data, offsets);
-  
-    gps_pub->WaitForConnection();
-    gps_pub->Publish(data);
-  }
-
-  if (vm.count("baro")) {
-    std::vector<double> offsets = vm["baro"].as<std::vector<double>>();
-    gazebo::transport::PublisherPtr gps_pub=node->Advertise<gazebo::msgs::Vector3d>("~/attack/baro",10);
-
-    gazebo::msgs::Vector3d baro_data;
-    fill_data(&baro_data, offsets);
-    gps_pub->WaitForConnection();
-    gps_pub->Publish(baro_data);
-  }
-
-  if (vm.count("wind")) {
-    std::vector<double> offsets = vm["wind"].as<std::vector<double>>();
+void publishWindAttack(const std::vector<double>& values) {
     gazebo::transport::PublisherPtr wind_pub = node->Advertise<gazebo::msgs::Vector3d>("~/attack/wind", 10);
     gazebo::transport::PublisherPtr wind_enable_pub = node->Advertise<gazebo::msgs::Int>("~/attack/wind/enabled", 10);
 
     gazebo::msgs::Vector3d data;
-    fill_data(&data, offsets);
+    fill_data(&data, values);
 
     gazebo::msgs::Int enable_data;
-    enable_data.set_data(0);
+    enable_data.set_data(0); 
 
     wind_pub->WaitForConnection();
     wind_pub->Publish(data);
 
     wind_enable_pub->WaitForConnection();
     wind_enable_pub->Publish(enable_data);
-    
+}
 
-  }
+void publishInt(const std::string& topic, int value) {
+    gazebo::transport::PublisherPtr pub = node->Advertise<gazebo::msgs::Int>(topic, 10);
+    gazebo::msgs::Int data;
+    data.set_data(value);
+    pub->WaitForConnection();
+    pub->Publish(data);
+}
 
-  if (vm.count("mag")) {
-    std::vector<double> offsets = vm["mag"].as<std::vector<double>>();
-    gazebo::transport::PublisherPtr mag_pub = node->Advertise<gazebo::msgs::Vector3d>("~/attack/mag", 10);
-    
+void processCommandLine(int _argc, char **_argv) {
+    po::options_description desc("Allowed options");
+    desc.add_options()
+        ("abs", po::value<std::vector<double>>()->multitoken(), "Absolute GPS offset")
+        ("rot", po::value<std::vector<double>>()->multitoken(), "Rotational offset")
+        ("imu", po::value<std::vector<double>>()->multitoken(), "IMU offset")
+        ("lidar", po::value<std::vector<double>>()->multitoken(), "Lidar offset")
+        ("sonar", po::value<std::vector<double>>()->multitoken(), "Sonar offset")
+        ("baro", po::value<std::vector<double>>()->multitoken(), "Barometer offset")
+        ("mag", po::value<std::vector<double>>()->multitoken(), "Magnetometer offset")
+        ("camera", po::value<double>()->multitoken(), "Camera")
+        ("stream", po::value<double>()->multitoken(), "Stream")
+        ("motor", po::value<std::vector<double>>()->multitoken(), "Motor")
+        ("wind", po::value<std::vector<double>>()->multitoken(), "Toggle wind attack");
 
-    gazebo::msgs::Vector3d mag_data;
-    fill_data(&mag_data, offsets);
-    std::cout << "Wat\n";
-    mag_pub->WaitForConnection();
-    mag_pub->Publish(mag_data);
-    std::cout << "MAG\n";
-  }
+    po::positional_options_description p;
+    p.add("abs", 3);
+    p.add("rot", 2);
+    p.add("imu", 3);
+    p.add("sonar", 2);
+    p.add("baro", 3);
+    p.add("wind", 3);
+    p.add("mag", 3);
+    p.add("lidar", 3);
+    po::variables_map vm;
+    po::store(po::command_line_parser(_argc, _argv)
+            .options(desc)
+            .positional(p)
+            .run(), vm);
+    po::notify(vm);
 
-
-  // gazebo::msgs::Any data1;
-  const char *arg = _argv[1];
-    /*if (std::strcmp(arg, "-abs") == 0)
-    {
-      // Construct PublisherPtr with topic "~/attack/gps"
-      gazebo::transport::PublisherPtr gps_pub = node->Advertise<gazebo::msgs::Vector3d>("~/attack/gps", 10);
-
-      // Create Vector3d
-      gazebo::msgs::Vector3d data;
-      data.set_x(atof(_argv[2]));
-      data.set_y(atof(_argv[3]));
-      data.set_z(atof(_argv[4]));
-
-      // Publish Message
-      gps_pub->WaitForConnection();
-      gps_pub->Publish(data);
-    }
-    else if (std::strcmp(arg, "-rot") == 0)
-    {
-      // Construct PublisherPtr with topic "~/attack/gps_rot"
-      gazebo::transport::PublisherPtr gps_pub = node->Advertise<gazebo::msgs::Vector3d>("~/attack/gps_rot", 10);
-
-      // Create Vector3d
-      gazebo::msgs::Vector3d data;
-      data.set_x(atof(_argv[2]));
-      data.set_y(atof(_argv[3]));
-      data.set_z(0.0);
-
-      // Publish Message
-      gps_pub->WaitForConnection();
-      gps_pub->Publish(data);
-
-      std::cout << "Spoofing Arguments: -rot \n"  ;
-    } */  
-    if (std::strcmp(arg,"-imu")==0)
-    {
-      // gazebo::transport::PublisherPtr gps_pub1=node->Advertise<gazebo::msgs::Any>("~/attack/imu",10);
-      gazebo::transport::PublisherPtr gps_pub=node->Advertise<gazebo::msgs::Vector3d>("~/attack/imu",10);
-
-      gazebo::msgs::Vector3d data;
-      data.set_x(atof(_argv[2]));
-      data.set_y(atof(_argv[3]));
-      data.set_z(atof(_argv[4]));
-
-
-      // gazebo::msgs::Any data;
-      // data=gazebo::msgs::ConvertAny(atof(_argv[2]));
-      
-  
-      gps_pub->WaitForConnection();
-      gps_pub->Publish(data);
-
-      std::cout<< "Influence imu Data: -imu \n"  ;
-    }
-    else if (std::strcmp(arg,"-lidar")==0)
-    {
-      // gazebo::transport::PublisherPtr gps_pub1=node->Advertise<gazebo::msgs::Any>("~/attack/imu",10);
-      gazebo::transport::PublisherPtr gps_pub=node->Advertise<gazebo::msgs::Vector3d>("~/attack/lidar",10);
-
-      gazebo::msgs::Vector3d data;
-      data.set_x(atof(_argv[2]));
-      data.set_y(atof(_argv[3]));
-      data.set_z(0.0);
-
-
-      // gazebo::msgs::Any data;
-      // data=gazebo::msgs::ConvertAny(atof(_argv[2]));
-      
-  
-      gps_pub->WaitForConnection();
-      gps_pub->Publish(data);
-
-      std::cout<< "Influence lidar Data: -lidar \n"  ;
-    }
-    else if (std::strcmp(arg,"-sonar")==0)
-    {
-      gazebo::transport::PublisherPtr gps_pub=node->Advertise<gazebo::msgs::Vector3d>("~/attack/sonar",10);
-
-      gazebo::msgs::Vector3d data;
-      data.set_x(atof(_argv[2]));
-      data.set_y(atof(_argv[3]));
-      data.set_z(0.0);
-
-      
-  
-      gps_pub->WaitForConnection();
-      gps_pub->Publish(data);
-
-      std::cout<< "Influence Sonar Data: -sonar \n"  ;
-    }
-    else if (std::strcmp(arg,"-baro")==0)
-    {
-      gazebo::transport::PublisherPtr gps_pub=node->Advertise<gazebo::msgs::Vector3d>("~/attack/baro",10);
-
-      gazebo::msgs::Vector3d data;
-      data.set_x(atof(_argv[2]));
-      data.set_y(atof(_argv[3]));
-      data.set_z(0.0);
-
-
-      // gazebo::msgs::Any data;
-      // data=gazebo::msgs::ConvertAny(atof(_argv[2]));
-      
-  
-      gps_pub->WaitForConnection();
-      gps_pub->Publish(data);
-
-      std::cout<< "Influence baro Data:  \n"  ;
-    }
-    else if (std::strcmp(arg,"-mag")==0)
-    {
-      gazebo::transport::PublisherPtr gps_pub=node->Advertise<gazebo::msgs::Vector3d>("~/attack/mag",20);
-
-      gazebo::msgs::Vector3d data;
-      data.set_x(atof(_argv[2]));
-      data.set_y(atof(_argv[3]));
-      data.set_z(atof(_argv[4]));
-
-
-      // gazebo::msgs::Any data;
-      // data=gazebo::msgs::ConvertAny(atof(_argv[2]));
-      
-  
-      gps_pub->WaitForConnection();
-      gps_pub->Publish(data);
-
-      std::cout<< "Influence Mag Data: -mag \n"  ;
+    if (vm.count("rot")) {
+        std::vector<double> offsets = vm["rot"].as<std::vector<double>>();
+        publishSensorAttack("~/attack/gps", offsets);
     }
 
-    else if (std::strcmp(arg,"-camera")==0)
-    {
-      gazebo::transport::PublisherPtr camera_pub=node->Advertise<gazebo::msgs::Int>("~/video_stream",10);
-
-      gazebo::msgs::Int m;
-    // m.set_double_value(atof(_argv[2]));
-      m.set_data(atof(_argv[2]));
-      camera_pub->WaitForConnection();
-      camera_pub->Publish(m);
-      // camera_pub->ConnectWorldUpdateBegin
+    if (vm.count("imu")) {
+        std::cout << "IMU";
+        std::vector<double> offsets = vm["imu"].as<std::vector<double>>();
+        publishSensorAttack("~/attack/imu", offsets);
     }
 
-    
-    else if (std::strcmp(arg,"-stream")==0)
-    {
-      gazebo::transport::PublisherPtr stream_pub=node->Advertise<gazebo::msgs::Int>("~/attack/stream",10);
-      gazebo::msgs::Int m;
-      m.set_data(atof(_argv[2]));
-      stream_pub->WaitForConnection();
-      stream_pub->Publish(m);
+    if (vm.count("lidar")) {
+        std::vector<double> offsets = vm["lidar"].as<std::vector<double>>();
+        publishSensorAttack("~/attack/lidar", offsets);
     }
-    else if (std::strcmp(arg,"-motor")==0){
-      gazebo::transport::PublisherPtr motor_pub=node->Advertise<gazebo::msgs::Vector3d>("~/attack/motor",10);
-      gazebo::msgs::Vector3d data;
-      data.set_x(atof(_argv[2]));
-      data.set_y(atof(_argv[3]));
-      data.set_z(atof(_argv[4]));
-      motor_pub->WaitForConnection();
-      motor_pub->Publish(data); 
-    } 
 
-  gazebo::transport::fini();
-  return 0;
-  
+    if (vm.count("sonar")) {
+        std::vector<double> offsets = vm["sonar"].as<std::vector<double>>();
+        publishSensorAttack("~/attack/sonar", offsets);
+    }
+
+    if (vm.count("baro")) {
+        std::vector<double> offsets = vm["baro"].as<std::vector<double>>();
+        publishSensorAttack("~/attack/baro", offsets);
+    }
+
+    if (vm.count("wind")) {
+        std::vector<double> offsets = vm["wind"].as<std::vector<double>>();
+        publishWindAttack(offsets);
+    }
+
+    if (vm.count("mag")) {
+        std::vector<double> offsets = vm["mag"].as<std::vector<double>>();
+        publishSensorAttack("~/attack/mag", offsets);
+    }
+
+    if (vm.count("camera")) {
+        double value = vm["camera"].as<double>();
+        publishInt("~/video_stream", (int)value);
+    }
+
+    if (vm.count("stream")) {
+        double value = vm["stream"].as<double>();
+        publishInt("~/attack/stream", (int)value);
+    }
+
+    if (vm.count("motor")) {
+        std::vector<double> offsets = vm["motor"].as<std::vector<double>>();
+        publishSensorAttack("~/attack/motor", offsets);
+    }
+}
+
+static void glfw_error_callback(int error, const char* description) {
+    fprintf(stderr, "GLFW Error %d: %s\n", error, description);
+}
+
+int main(int _argc, char **_argv) {
+    gazebo::client::setup();
+    node.reset(new gazebo::transport::Node());
+    node->Init();
+
+    printf("It's cool man");
+
+    // Process command line arguments if provided
+    if (_argc > 1) {
+        processCommandLine(_argc, _argv);
+        gazebo::transport::fini();
+        return 0;
+    }
+
+    printf("It's cool man");
+
+    // Initialize GUI otherwise
+    glfwSetErrorCallback(glfw_error_callback);
+    if (!glfwInit())
+        return 1;
+
+    const char* glsl_version = "#version 130";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Sensor Attack Interface", nullptr, nullptr);
+    if (window == nullptr)
+        return 1;
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1); // Enable vsync
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+    ImGui::StyleColorsDark();
+
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init(glsl_version);
+
+    static float gps_rot[3] = {0.0f, 0.0f, 0.0f};
+    static float imu[3] = {0.0f, 0.0f, 0.0f};
+    static float lidar[3] = {0.0f, 0.0f, 0.0f};
+    static float sonar[3] = {0.0f, 0.0f, 0.0f};
+    static float baro[3] = {0.0f, 0.0f, 0.0f};
+    static float mag[3] = {0.0f, 0.0f, 0.0f};
+    static float motor[3] = {0.0f, 0.0f, 0.0f};
+    static float wind[3] = {0.0f, 0.0f, 0.0f};
+    static int camera = 0;
+    static int stream = 0;
+    static bool wind_enabled = false;
+
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        ImGui::Begin("Sensor Attack Interface");
+        
+        ImGui::Text("Offsets (0.0001 ~= 36 feet, 0.00001 ~= 3.6 feet, 0.000001 ~= 4 inches)");
+        ImGui::Separator();
+
+        if (ImGui::CollapsingHeader("GPS Rotational Offset")) {
+            ImGui::InputFloat3("GPS Rot (x,y,z)", gps_rot);
+            if (ImGui::Button("Apply GPS Rot")) {
+                std::vector<double> values = {gps_rot[0], gps_rot[1], gps_rot[2]};
+                publishSensorAttack("~/attack/gps", values);
+            }
+        }
+
+        if (ImGui::CollapsingHeader("IMU Offset")) {
+            ImGui::InputFloat3("IMU (x,y,z)", imu);
+            if (ImGui::Button("Apply IMU")) {
+                std::vector<double> values = {imu[0], imu[1], imu[2]};
+                publishSensorAttack("~/attack/imu", values);
+            }
+        }
+
+        if (ImGui::CollapsingHeader("Lidar Offset")) {
+            ImGui::InputFloat3("Lidar (x,y,z)", lidar);
+            if (ImGui::Button("Apply Lidar")) {
+                std::vector<double> values = {lidar[0], lidar[1], lidar[2]};
+                publishSensorAttack("~/attack/lidar", values);
+            }
+        }
+
+        if (ImGui::CollapsingHeader("Sonar Offset")) {
+            ImGui::InputFloat3("Sonar (x,y,z)", sonar);
+            if (ImGui::Button("Apply Sonar")) {
+                std::vector<double> values = {sonar[0], sonar[1], sonar[2]};
+                publishSensorAttack("~/attack/sonar", values);
+            }
+        }
+
+        if (ImGui::CollapsingHeader("Barometer Offset")) {
+            ImGui::InputFloat3("Barometer (x,y,z)", baro);
+            if (ImGui::Button("Apply Barometer")) {
+                std::vector<double> values = {baro[0], baro[1], baro[2]};
+                publishSensorAttack("~/attack/baro", values);
+            }
+        }
+
+        if (ImGui::CollapsingHeader("Magnetometer Offset")) {
+            ImGui::InputFloat3("Magnetometer (x,y,z)", mag);
+            if (ImGui::Button("Apply Magnetometer")) {
+                std::vector<double> values = {mag[0], mag[1], mag[2]};
+                publishSensorAttack("~/attack/mag", values);
+            }
+        }
+
+        if (ImGui::CollapsingHeader("Motor Offset")) {
+            ImGui::InputFloat3("Motor (x,y,z)", motor);
+            if (ImGui::Button("Apply Motor")) {
+                std::vector<double> values = {motor[0], motor[1], motor[2]};
+                publishSensorAttack("~/attack/motor", values);
+            }
+        }
+
+        if (ImGui::CollapsingHeader("Wind Attack")) {
+            ImGui::InputFloat3("Wind (x,y,z)", wind);
+            ImGui::Checkbox("Enable Wind", &wind_enabled);
+            if (ImGui::Button("Apply Wind")) {
+                std::vector<double> values = {wind[0], wind[1], wind[2]};
+                publishWindAttack(values);
+            }
+        }
+
+        if (ImGui::CollapsingHeader("Camera and Stream")) {
+            ImGui::SliderInt("Camera Value", &camera, 0, 10);
+            if (ImGui::Button("Apply Camera")) {
+                publishInt("~/video_stream", camera);
+            }
+            
+            ImGui::SliderInt("Stream Value", &stream, 0, 10);
+            if (ImGui::Button("Apply Stream")) {
+                publishInt("~/attack/stream", stream);
+            }
+        }
+
+        ImGui::Separator();
+        if (ImGui::Button("Exit")) {
+            break;
+        }
+
+        ImGui::End();
+
+        ImGui::Render();
+        int display_w, display_h;
+        glfwGetFramebufferSize(window, &display_w, &display_h);
+        glViewport(0, 0, display_w, display_h);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        glfwSwapBuffers(window);
+    }
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
+
+    gazebo::transport::fini();
+    return 0;
 }
