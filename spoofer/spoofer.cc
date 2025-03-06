@@ -213,92 +213,427 @@ int main(int _argc, char **_argv) {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        ImGui::Begin("Sensor Attack Interface");
+        // Set custom style for a more polished UI
+        ImGui::GetStyle().FrameRounding = 4.0f;
+        ImGui::GetStyle().GrabRounding = 4.0f;
+        ImGui::GetStyle().WindowRounding = 0.0f;
+        ImGui::GetStyle().FramePadding = ImVec2(8, 6);
+        ImGui::GetStyle().ItemSpacing = ImVec2(10, 10);
+        ImGui::GetStyle().ButtonTextAlign = ImVec2(0.5f, 0.5f);
         
+        // Slightly nicer color scheme
+        ImVec4* colors = ImGui::GetStyle().Colors;
+        colors[ImGuiCol_WindowBg] = ImVec4(0.06f, 0.06f, 0.06f, 1.00f);
+        colors[ImGuiCol_Header] = ImVec4(0.20f, 0.22f, 0.27f, 1.00f);
+        colors[ImGuiCol_HeaderHovered] = ImVec4(0.28f, 0.30f, 0.35f, 1.00f);
+        colors[ImGuiCol_Button] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
+        colors[ImGuiCol_ButtonHovered] = ImVec4(0.28f, 0.40f, 0.50f, 1.00f);
+        colors[ImGuiCol_ButtonActive] = ImVec4(0.20f, 0.30f, 0.40f, 1.00f);
+        colors[ImGuiCol_FrameBg] = ImVec4(0.15f, 0.15f, 0.15f, 1.00f);
+        colors[ImGuiCol_FrameBgHovered] = ImVec4(0.19f, 0.20f, 0.21f, 1.00f);
+        
+        // Create a window that takes up entire screen
+        ImGui::SetNextWindowPos(ImVec2(0, 0));
+        ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+        ImGui::Begin("Sensor Attack Interface", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
+        
+        // Title and description centered
+        float windowWidth = ImGui::GetWindowWidth();
+        float titleWidth = ImGui::CalcTextSize("UAV Sensor Attack Interface").x;
+        ImGui::SetCursorPosX((windowWidth - titleWidth) * 0.5f);
+        ImGui::Text("UAV Sensor Attack Interface");
+        ImGui::Spacing();
+        
+        float offsetTextWidth = ImGui::CalcTextSize("Offsets (0.0001 ~= 36 feet, 0.00001 ~= 3.6 feet, 0.000001 ~= 4 inches)").x;
+        ImGui::SetCursorPosX((windowWidth - offsetTextWidth) * 0.5f);
         ImGui::Text("Offsets (0.0001 ~= 36 feet, 0.00001 ~= 3.6 feet, 0.000001 ~= 4 inches)");
         ImGui::Separator();
+        ImGui::Spacing();
 
-        if (ImGui::CollapsingHeader("GPS Rotational Offset")) {
-            ImGui::InputFloat3("GPS Rot (x,y,z)", gps_rot);
-            if (ImGui::Button("Apply GPS Rot")) {
-                std::vector<double> values = {gps_rot[0], gps_rot[1], gps_rot[2]};
-                publishSensorAttack("~/attack/gps", values);
+        // Calculate column widths for a symmetrical layout
+        float totalWidth = ImGui::GetContentRegionAvail().x;
+        float columnWidth = totalWidth / 2.0f - 10.0f;
+        float inputWidth = columnWidth * 0.7f;
+        float buttonWidth = columnWidth * 0.25f;
+        
+        // We'll use the table feature directly, no need for BeginChild here
+        float panelWidth = std::min(windowWidth - 40.0f, 1200.0f); // Max width with 20px padding on each side
+        float colWidth = panelWidth / 2.0f - 10.0f;
+        
+        // Calculate heights to ensure vertical alignment
+        float panelHeaderHeight = 30.0f;  // Approximate header height
+        float panelContentHeight = 110.0f; // Fixed height for panel content to ensure alignment
+        
+        // Helper function to create a consistent sensor control panel
+        auto createSensorPanel = [&](const char* title, float* values, const char* tooltip, 
+                                  const char* buttonId, const std::string& topic) {
+            // Always create the header (regular alignment, not centered)
+            bool isOpen = ImGui::CollapsingHeader(title, ImGuiTreeNodeFlags_DefaultOpen);
+            
+            // Add tooltip for the panel
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("%s", tooltip);
+            
+            if (isOpen) {
+                // Use BeginChild for creating a child window to contain the controls
+                ImGui::BeginChild(buttonId, ImVec2(colWidth - 10.0f, panelContentHeight), false, ImGuiWindowFlags_NoScrollbar);
+                
+                // Center the entire content area
+                float panelWidth = ImGui::GetContentRegionAvail().x;
+                
+                // Center the description text
+                float textWidth = ImGui::CalcTextSize(tooltip).x;
+                float textWrappedWidth = std::min(panelWidth * 0.9f, 500.0f);
+                ImGui::SetCursorPosX((panelWidth - textWrappedWidth) * 0.5f);
+                ImGui::PushTextWrapPos(ImGui::GetCursorPosX() + textWrappedWidth);
+                ImGui::TextUnformatted(tooltip);
+                ImGui::PopTextWrapPos();
+                ImGui::Spacing();
+                ImGui::Spacing();
+                
+                // Center the input control
+                float controlWidth = panelWidth * 0.7f;
+                float btnWidth = panelWidth * 0.2f;
+                
+                // Create centered input row
+                float inputRowWidth = controlWidth * 0.9f;
+                float fieldWidth = inputRowWidth / 3.5f;
+                
+                // Center the input controls
+                ImGui::SetCursorPosX((panelWidth - inputRowWidth) * 0.5f);
+                
+                // X input
+                ImGui::Text("X:");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(fieldWidth);
+                ImGui::InputFloat("##x", &values[0], 0.0001f, 0.001f, "%.6f");
+                ImGui::PopItemWidth();
+                
+                ImGui::SameLine();
+                ImGui::Text("Y:");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(fieldWidth);
+                ImGui::InputFloat("##y", &values[1], 0.0001f, 0.001f, "%.6f");
+                ImGui::PopItemWidth();
+                
+                ImGui::SameLine();
+                ImGui::Text("Z:");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(fieldWidth);
+                ImGui::InputFloat("##z", &values[2], 0.0001f, 0.001f, "%.6f");
+                ImGui::PopItemWidth();
+                
+                ImGui::Spacing();
+                
+                // Center the button
+                ImGui::SetCursorPosX((panelWidth - btnWidth) * 0.5f);
+                if (ImGui::Button(buttonId, ImVec2(btnWidth, 0))) {
+                    std::vector<double> vals = {values[0], values[1], values[2]};
+                    publishSensorAttack(topic, vals);
+                }
+                
+                ImGui::EndChild();
+                ImGui::Separator();
+            } else {
+                // Add a spacer if panel is closed to maintain vertical alignment
+                ImGui::Dummy(ImVec2(colWidth - 20, 5.0f));
             }
-        }
-
-        if (ImGui::CollapsingHeader("IMU Offset")) {
-            ImGui::InputFloat3("IMU (x,y,z)", imu);
-            if (ImGui::Button("Apply IMU")) {
-                std::vector<double> values = {imu[0], imu[1], imu[2]};
-                publishSensorAttack("~/attack/imu", values);
+        };
+        
+        // Helper function for sliders
+        auto createSliderPanel = [&](const char* title, int* value, const char* tooltip, 
+                                  const char* buttonId, const std::string& topic) {                         
+            // Always create the header (regular alignment, not centered)
+            bool isOpen = ImGui::CollapsingHeader(title, ImGuiTreeNodeFlags_DefaultOpen);
+            
+            // Add tooltip for the panel
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("%s", tooltip);
+            
+            if (isOpen) {
+                // Use BeginChild for creating a child window to contain the controls
+                ImGui::BeginChild(buttonId, ImVec2(colWidth - 10.0f, panelContentHeight), false, ImGuiWindowFlags_NoScrollbar);
+                
+                // Center the entire content area
+                float panelWidth = ImGui::GetContentRegionAvail().x;
+                
+                // Center the description text
+                float textWidth = ImGui::CalcTextSize(tooltip).x;
+                float textWrappedWidth = std::min(panelWidth * 0.9f, 500.0f);
+                ImGui::SetCursorPosX((panelWidth - textWrappedWidth) * 0.5f);
+                ImGui::PushTextWrapPos(ImGui::GetCursorPosX() + textWrappedWidth);
+                ImGui::TextUnformatted(tooltip);
+                ImGui::PopTextWrapPos();
+                ImGui::Spacing();
+                ImGui::Spacing();
+                
+                // Center the slider control
+                float controlWidth = panelWidth * 0.7f;
+                float btnWidth = panelWidth * 0.2f;
+                
+                // Center the label and slider
+                ImGui::SetCursorPosX((panelWidth - controlWidth - 50) * 0.5f);
+                ImGui::Text("Value:");
+                ImGui::SameLine();
+                
+                ImGui::PushItemWidth(controlWidth);
+                ImGui::SliderInt("##slider", value, 0, 10);
+                ImGui::PopItemWidth();
+                
+                ImGui::Spacing();
+                
+                // Center the button
+                ImGui::SetCursorPosX((panelWidth - btnWidth) * 0.5f);
+                if (ImGui::Button(buttonId, ImVec2(btnWidth, 0))) {
+                    publishInt(topic, *value);
+                }
+                
+                ImGui::EndChild();
+                ImGui::Separator();
+            } else {
+                // Add a spacer if panel is closed to maintain vertical alignment
+                ImGui::Dummy(ImVec2(colWidth - 20, 5.0f));
             }
-        }
-
-        if (ImGui::CollapsingHeader("Lidar Offset")) {
-            ImGui::InputFloat3("Lidar (x,y,z)", lidar);
-            if (ImGui::Button("Apply Lidar")) {
-                std::vector<double> values = {lidar[0], lidar[1], lidar[2]};
-                publishSensorAttack("~/attack/lidar", values);
-            }
-        }
-
-        if (ImGui::CollapsingHeader("Sonar Offset")) {
-            ImGui::InputFloat3("Sonar (x,y,z)", sonar);
-            if (ImGui::Button("Apply Sonar")) {
-                std::vector<double> values = {sonar[0], sonar[1], sonar[2]};
-                publishSensorAttack("~/attack/sonar", values);
-            }
-        }
-
-        if (ImGui::CollapsingHeader("Barometer Offset")) {
-            ImGui::InputFloat3("Barometer (x,y,z)", baro);
-            if (ImGui::Button("Apply Barometer")) {
-                std::vector<double> values = {baro[0], baro[1], baro[2]};
-                publishSensorAttack("~/attack/baro", values);
-            }
-        }
-
-        if (ImGui::CollapsingHeader("Magnetometer Offset")) {
-            ImGui::InputFloat3("Magnetometer (x,y,z)", mag);
-            if (ImGui::Button("Apply Magnetometer")) {
-                std::vector<double> values = {mag[0], mag[1], mag[2]};
-                publishSensorAttack("~/attack/mag", values);
-            }
-        }
-
-        if (ImGui::CollapsingHeader("Motor Offset")) {
-            ImGui::InputFloat3("Motor (x,y,z)", motor);
-            if (ImGui::Button("Apply Motor")) {
-                std::vector<double> values = {motor[0], motor[1], motor[2]};
-                publishSensorAttack("~/attack/motor", values);
-            }
-        }
-
-        if (ImGui::CollapsingHeader("Wind Attack")) {
-            ImGui::InputFloat3("Wind (x,y,z)", wind);
-            ImGui::Checkbox("Enable Wind", &wind_enabled);
-            if (ImGui::Button("Apply Wind")) {
-                std::vector<double> values = {wind[0], wind[1], wind[2]};
-                publishWindAttack(values);
-            }
-        }
-
-        if (ImGui::CollapsingHeader("Camera and Stream")) {
-            ImGui::SliderInt("Camera Value", &camera, 0, 10);
-            if (ImGui::Button("Apply Camera")) {
-                publishInt("~/video_stream", camera);
+        };
+        
+        // Calculate optimal width for the table - use almost the full window width
+        float tableWidth = ImGui::GetWindowWidth() * 0.95f;
+        ImGui::SetCursorPosX((ImGui::GetWindowWidth() - tableWidth) * 0.5f);
+        
+        // Use ImGui's proper table feature with flags for auto-resizing
+        if (ImGui::BeginTable("sensorTable", 2, 
+                ImGuiTableFlags_Borders | 
+                ImGuiTableFlags_SizingStretchSame | 
+                ImGuiTableFlags_Resizable | 
+                ImGuiTableFlags_ScrollY, 
+                ImVec2(tableWidth, 0))) {
+            
+            // Set column widths to be equal
+            for (int col = 0; col < 2; col++)
+                ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
+            
+            // Row 1
+            ImGui::TableNextRow();
+            
+            // Cell 1,1: GPS
+            ImGui::TableSetColumnIndex(0);
+            createSensorPanel("GPS Offset", gps_rot, 
+                           "Controls GPS position offset (x,y,z). Values around 0.0001 (~36 feet) are significant.",
+                           "Apply##GPS", "~/attack/gps");
+            
+            // Cell 1,2: IMU
+            ImGui::TableSetColumnIndex(1);
+            createSensorPanel("IMU Offset", imu,
+                           "Controls inertial measurement unit offset. Affects orientation readings.",
+                           "Apply##IMU", "~/attack/imu");
+            
+            // Row 2
+            ImGui::TableNextRow();
+            
+            // Cell 2,1: Lidar
+            ImGui::TableSetColumnIndex(0);
+            createSensorPanel("Lidar Offset", lidar,
+                           "Controls Lidar sensor readings offset. Affects distance measurements.",
+                           "Apply##Lidar", "~/attack/lidar");
+            
+            // Cell 2,2: Sonar
+            ImGui::TableSetColumnIndex(1);
+            createSensorPanel("Sonar Offset", sonar,
+                           "Controls sonar/ultrasonic sensor offset. Affects height measurements.",
+                           "Apply##Sonar", "~/attack/sonar");
+            
+            // Row 3
+            ImGui::TableNextRow();
+            
+            // Cell 3,1: Barometer
+            ImGui::TableSetColumnIndex(0);
+            createSensorPanel("Barometer Offset", baro,
+                           "Controls barometric pressure sensor offset. Affects altitude readings.",
+                           "Apply##Baro", "~/attack/baro");
+            
+            // Cell 3,2: Magnetometer
+            ImGui::TableSetColumnIndex(1);
+            createSensorPanel("Magnetometer Offset", mag,
+                           "Controls magnetometer sensor offset. Affects compass heading.",
+                           "Apply##Mag", "~/attack/mag");
+            
+            // Row 4
+            ImGui::TableNextRow();
+            
+            // Cell 4,1: Motor
+            ImGui::TableSetColumnIndex(0);
+            createSensorPanel("Motor Offset", motor,
+                           "Controls motor speed offset values. Affects UAV thrust.",
+                           "Apply##Motor", "~/attack/motor");
+            
+            // Cell 4,2: Wind
+            ImGui::TableSetColumnIndex(1);
+            
+            // Wind control is special due to checkbox
+            bool windIsOpen = ImGui::CollapsingHeader("Wind Attack", ImGuiTreeNodeFlags_DefaultOpen);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Controls wind simulation parameters. Affects UAV stability.");
+            
+            if (windIsOpen) {
+                // Use BeginChild for the wind panel
+                ImGui::BeginChild("windPanel", ImVec2(colWidth - 10.0f, panelContentHeight), false, ImGuiWindowFlags_NoScrollbar);
+                
+                // Center the entire content area
+                float panelWidth = ImGui::GetContentRegionAvail().x;
+                
+                // Center the description text
+                float textWrappedWidth = std::min(panelWidth * 0.9f, 500.0f);
+                ImGui::SetCursorPosX((panelWidth - textWrappedWidth) * 0.5f);
+                ImGui::PushTextWrapPos(ImGui::GetCursorPosX() + textWrappedWidth);
+                ImGui::TextUnformatted("Controls wind simulation parameters. Affects UAV stability.");
+                ImGui::PopTextWrapPos();
+                ImGui::Spacing();
+                ImGui::Spacing();
+                
+                float controlWidth = panelWidth * 0.7f;
+                float btnWidth = panelWidth * 0.2f;
+                
+                // Center the input controls
+                ImGui::SetCursorPosX((panelWidth - controlWidth) * 0.5f);
+                
+                ImGui::Text("X:");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(controlWidth / 3 - 10);
+                ImGui::InputFloat("##windx", &wind[0], 0.0001f, 0.001f, "%.6f");
+                ImGui::PopItemWidth();
+                
+                ImGui::SameLine();
+                ImGui::Text("Y:");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(controlWidth / 3 - 10);
+                ImGui::InputFloat("##windy", &wind[1], 0.0001f, 0.001f, "%.6f");
+                ImGui::PopItemWidth();
+                
+                ImGui::SameLine();
+                ImGui::Text("Z:");
+                ImGui::SameLine();
+                ImGui::PushItemWidth(controlWidth / 3 - 10);
+                ImGui::InputFloat("##windz", &wind[2], 0.0001f, 0.001f, "%.6f");
+                ImGui::PopItemWidth();
+                
+                // Center checkbox
+                float checkboxWidth = ImGui::CalcTextSize("Enable Wind").x + 24.0f;
+                ImGui::SetCursorPosX((panelWidth - checkboxWidth) * 0.5f);
+                ImGui::Checkbox("Enable Wind", &wind_enabled);
+                
+                // Center the Apply button
+                ImGui::SetCursorPosX((panelWidth - btnWidth) * 0.5f);
+                if (ImGui::Button("Apply##Wind", ImVec2(btnWidth, 0))) {
+                    std::vector<double> values = {wind[0], wind[1], wind[2]};
+                    publishWindAttack(values);
+                }
+                
+                ImGui::EndChild();
+                ImGui::Separator();
+            } else {
+                // Add a spacer if panel is closed to maintain vertical alignment
+                ImGui::Dummy(ImVec2(colWidth - 20, 5.0f));
             }
             
-            ImGui::SliderInt("Stream Value", &stream, 0, 10);
-            if (ImGui::Button("Apply Stream")) {
-                publishInt("~/attack/stream", stream);
-            }
+            // Row 5 - Add Camera and Stream controls
+            ImGui::TableNextRow();
+            
+            // Cell 5,1: Camera Control
+            ImGui::TableSetColumnIndex(0);
+            createSliderPanel("Camera Control", &camera,
+                         "Controls camera settings. Higher values increase exposure.",
+                         "Apply##Camera", "~/video_stream");
+                
+            // Cell 5,2: Stream Control
+            ImGui::TableSetColumnIndex(1);
+            createSliderPanel("Stream Control", &stream,
+                         "Controls data stream parameters. Higher values increase bandwidth.",
+                         "Apply##Stream", "~/attack/stream");
+            
+            ImGui::EndTable();
         }
-
-        ImGui::Separator();
-        if (ImGui::Button("Exit")) {
+        
+        // Ensure no EndChild() is needed here
+        
+        // Center the action buttons and make them responsive
+        // Using the previously defined windowWidth
+        float buttonAreaWidth = std::min(windowWidth * 0.6f, 800.0f);
+        float halfButtonWidth = (buttonAreaWidth / 2.0f) - 10.0f;
+        
+        // Container to center the buttons
+        ImGui::SetCursorPosX((windowWidth - buttonAreaWidth) * 0.5f);
+        ImGui::BeginGroup();
+        
+        // Reset All button with tooltip
+        if (ImGui::Button("Reset All Sensors", ImVec2(halfButtonWidth, 50))) {
+            std::vector<double> zeroes = {0.0, 0.0, 0.0};
+            
+            // Only send reset messages for non-zero values to prevent freezing
+            bool hasNonZeroGPS = false;
+            bool hasNonZeroIMU = false;
+            bool hasNonZeroLidar = false;
+            bool hasNonZeroSonar = false;
+            bool hasNonZeroBaro = false;
+            bool hasNonZeroMag = false;
+            bool hasNonZeroMotor = false;
+            bool hasNonZeroWind = false;
+            
+            // Check for non-zero values
+            for (int i = 0; i < 3; i++) {
+                if (gps_rot[i] != 0.0f) hasNonZeroGPS = true;
+                if (imu[i] != 0.0f) hasNonZeroIMU = true;
+                if (lidar[i] != 0.0f) hasNonZeroLidar = true;
+                if (sonar[i] != 0.0f) hasNonZeroSonar = true;
+                if (baro[i] != 0.0f) hasNonZeroBaro = true;
+                if (mag[i] != 0.0f) hasNonZeroMag = true;
+                if (motor[i] != 0.0f) hasNonZeroMotor = true;
+                if (wind[i] != 0.0f) hasNonZeroWind = true;
+            }
+            
+            // Only publish reset for non-zero values
+            if (hasNonZeroGPS) publishSensorAttack("~/attack/gps", zeroes);
+            if (hasNonZeroIMU) publishSensorAttack("~/attack/imu", zeroes);
+            if (hasNonZeroLidar) publishSensorAttack("~/attack/lidar", zeroes);
+            if (hasNonZeroSonar) publishSensorAttack("~/attack/sonar", zeroes);
+            if (hasNonZeroBaro) publishSensorAttack("~/attack/baro", zeroes);
+            if (hasNonZeroMag) publishSensorAttack("~/attack/mag", zeroes);
+            if (hasNonZeroMotor) publishSensorAttack("~/attack/motor", zeroes);
+            if (hasNonZeroWind) publishWindAttack(zeroes);
+            
+            // Only reset non-zero UI controls
+            if (camera != 0) publishInt("~/video_stream", 0);
+            if (stream != 0) publishInt("~/attack/stream", 0);
+            
+            // Reset all UI values to 0
+            for (int i = 0; i < 3; i++) {
+                gps_rot[i] = 0.0f;
+                imu[i] = 0.0f;
+                lidar[i] = 0.0f;
+                sonar[i] = 0.0f;
+                baro[i] = 0.0f;
+                mag[i] = 0.0f;
+                motor[i] = 0.0f;
+                wind[i] = 0.0f;
+            }
+            camera = 0;
+            stream = 0;
+            wind_enabled = false;
+        }
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Resets all sensor offsets to zero and publishes zero values to all attack channels");
+        
+        ImGui::SameLine(0, 20.0f);
+        
+        // Exit button
+        if (ImGui::Button("Exit Application", ImVec2(halfButtonWidth, 50))) {
             break;
         }
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Close the application");
+            
+        ImGui::EndGroup();
+        
+        // No status bar text at the bottom
 
         ImGui::End();
 

@@ -35,3 +35,4 @@
 ./spoofer/.vscode
 ./spoofer/build/
 ./spoofer/imgui
+./spoofer/.DS_Store

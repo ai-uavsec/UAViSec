@@ -150,6 +150,11 @@ These following tools are located within the `CLONED_REPOSITORY/spoofer/build` d
       <option>:  1: Attack On/Off
       <offset>:   the offset data you want the sensor make.
 * **Custom usage tips**\
+    The UI is shown below:
+    <img src="ui.png">
+    To apply an attack, press the "apply" button after changing the values. Multiple attacks can be launched simultaneously.
+    The "reset all sensors" button disables any attacks that you have launched.
+    
   	When use the camera test, you should use the Typhoon-h480 model with world you like, such as ksql_airport.world.
   	To use the camera and stream, you need to enable the video in QGroundControl. You can follow this link to set up stream in QGroundControl.
       * https://docs.px4.io/main/en/sim_gazebo_classic/#how-to-view-gazebo-video
