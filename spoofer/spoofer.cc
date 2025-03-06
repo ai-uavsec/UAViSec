@@ -213,7 +213,7 @@ int main(int _argc, char **_argv) {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        // Set custom style for a more polished UI
+        // Set custom style
         ImGui::GetStyle().FrameRounding = 4.0f;
         ImGui::GetStyle().GrabRounding = 4.0f;
         ImGui::GetStyle().WindowRounding = 0.0f;
@@ -552,9 +552,7 @@ int main(int _argc, char **_argv) {
             
             ImGui::EndTable();
         }
-        
-        // Ensure no EndChild() is needed here
-        
+                
         // Center the action buttons and make them responsive
         // Using the previously defined windowWidth
         float buttonAreaWidth = std::min(windowWidth * 0.6f, 800.0f);
@@ -633,8 +631,6 @@ int main(int _argc, char **_argv) {
             
         ImGui::EndGroup();
         
-        // No status bar text at the bottom
-
         ImGui::End();
 
         ImGui::Render();
