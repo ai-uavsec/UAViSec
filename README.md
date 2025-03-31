@@ -17,6 +17,8 @@ The following steps are required in order to run the PX4 flight simulation softw
 	1. Place `/bin/*` into `Tools/simulation/gazebo-classic/sitl_gazebo-classic/` to overwrite the default SITL-Gazebo-Classic plugins.
  	2. Place `/px4/*` into `src/modules/simulation/simulator_mavlink/` to overwrite the px4_simulation file.
 	3.  Rebuild the PX4-Autopilot software
+        4. Place '/spoofer/sensor/*.pb.cc' and '/spoofer/sensor/*.pb.hh' into '$PX4/Firmware/build/px4_sitl_default/build_gazebo-classic/' 
+  
     ```console
 	  make px4_sitl gazebo-classic
 	  ```
@@ -25,7 +27,8 @@ The following steps are required in order to run the PX4 flight simulation softw
       chmod +x install.sh
       ./install.sh <PX4 root directory>
     ```
-  4. Clone ImGui
+
+  5. Clone ImGui
     ```console
       cd spoofer
       git clone https://github.com/ocornut/imgui.git
