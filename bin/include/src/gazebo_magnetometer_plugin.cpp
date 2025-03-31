@@ -47,10 +47,12 @@ bool magnet_attack=false;
 double x_scale = 1.0;
 double y_scale = 1.0;
 bool swap_attack= false;
+bool mag_attack_zero=false;
 typedef const boost::shared_ptr<const msgs::Vector3d> Message;
 
 // transport
 transport::SubscriberPtr maglistener;
+transport::PublisherPtr mag_data_pub_;
 
 void OnMagSignal(Message &_msg)
 {
@@ -71,6 +73,9 @@ void OnMagSignal(Message &_msg)
   }
   else if(signal_==2.0)
     swap_attack = !swap_attack;
+  else if(signal_==3.0){
+    mag_attack_zero=!mag_attack_zero;
+  }
 }
 
 GZ_REGISTER_MODEL_PLUGIN(MagnetometerPlugin)
@@ -158,6 +163,9 @@ void MagnetometerPlugin::Load(physics::ModelPtr model, sdf::ElementPtr sdf)
   pub_mag_ = node_handle_->Advertise<sensor_msgs::msgs::MagneticField>("~/" + model_->GetName() + mag_topic_, 10);
   gt_sub_ = node_handle_->Subscribe("~/" + model_->GetName() + gt_sub_topic_, &MagnetometerPlugin::GroundtruthCallback, this);
   maglistener = node_handle_->Subscribe("~/attack/mag",&OnMagSignal,this);
+  mag_data_pub_ = node_handle_->Advertise<sensor_msgs::msgs::MagneticField>("~/log/mag", 10);
+
+  // maglistener = node_handle_->Subscribe("~/attack/mag",OnMagSignal,this);
 
   standard_normal_distribution_ = std::normal_distribution<double>(0.0, 1.0);
 
@@ -260,20 +268,15 @@ void MagnetometerPlugin::OnUpdate(const common::UpdateInfo&)
     }
     mag_message_.set_allocated_magnetic_field(magnetic_field);
 
-    // if (magnet_attack){
-    // // magnetic_field->set_x(measured_mag[0]*  scale);
-    // // magnetic_field->set_y(measured_mag[1]*  scale);
-    // // magnetic_field->set_z(measured_mag[2]*  scale);
-    // // mag_message_.set_allocated_magnetic_field(magnetic_field);
-    //   magnetic_field->set_x(-measured_mag[0]);
-    //   magnetic_field->set_y(-measured_mag[1]);
-    //   mag_message_.set_allocated_magnetic_field(magnetic_field);
-    // }
+    if (mag_attack_zero){
+      mag_message_.set_allocated_magnetic_field(0);
+    }
 
     last_pub_time_ = current_time;
 
     // publish mag msg
     pub_mag_->Publish(mag_message_);
+    mag_data_pub_->Publish(mag_message_);
   }
 }
 

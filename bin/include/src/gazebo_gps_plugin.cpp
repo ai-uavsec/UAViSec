@@ -218,6 +218,7 @@ void GpsPlugin::Load(sensors::SensorPtr _parent, sdf::ElementPtr _sdf)
 
   gravity_W_ = world_->Gravity();
 
+  info_pub_=node_handle_->Advertise<gazebo::msgs::Vector3d>("~/"+rootModelName+"/gps",10);
   gps_pub_ = node_handle_->Advertise<sensor_msgs::msgs::SITLGps>("~/" + rootModelName + "/link/" + gps_topic_, 10);
   gps_offset_list_ = node_handle_->Subscribe("~/attack/gps", &GpsPlugin::OnOffsetUpdate, this);
   gps_rot_offset_list_ = node_handle_->Subscribe("~/attack/gps_rot", &GpsPlugin::OnRotationOffsetUpdate, this);
@@ -320,6 +321,7 @@ void GpsPlugin::OnWorldUpdate(const common::UpdateInfo& /*_info*/)
   gps_msg.set_velocity(velocity_current_W_xy.Length());
   gps_msg.set_velocity_north(velocity_current_W.Y() + noise_gps_vel_.X());
   gps_msg.set_velocity_up(velocity_current_W.Z() - noise_gps_vel_.Z());
+
   gps_msg.set_attack_enabled(attack_enabled || (rot_attack_enabled && !is_nearly_equal(degree_offset_, 0.0)) );
 
   {
@@ -344,6 +346,8 @@ void GpsPlugin::OnSensorUpdate()
 
   sensor_msgs::msgs::SITLGps gps_msg;
   sensor_msgs::msgs::SITLGps raw_gps_msg;
+  gazebo::msgs::Vector3d info_msg;
+
   // apply GPS delay
   if ((current_time_ - last_gps_time_).Double() > 1 / parentSensor_->UpdateRate()) {
     last_gps_time_ = current_time_;
@@ -411,18 +415,20 @@ void GpsPlugin::OnSensorUpdate()
       }
 
       // Set Attack Enabled
-      // if (is_nearly_equal(pow(latitude_deg_offset_, 2) + pow(longitude_deg_offset_, 2) + pow(altitude_offset_, 2), 0.0))
+      // if (is_nearly_equal((pow(latitude_deg_offset_, 2) + pow(longitude_deg_offset_, 2) + pow(altitude_offset_, 2)), 0.0))
       // {
       //   attack_enabled = false;
       // }
+
       if(altitude_offset_ == altitude_offset_target_ && latitude_deg_offset_ == latitude_deg_offset_target_ && longitude_deg_offset_== longitude_deg_offset_target_){
         attack_enabled = false;
       }
 
-      // double i = (rand() % 9 + 1) * 0.0000001;
-      gps_msg.set_latitude_deg(gps_msg.latitude_deg() + latitude_deg_offset_);
+      double i = (rand() % 9 + 1) * 0.0000001;
+      gps_msg.set_latitude_deg(gps_msg.latitude_deg() + latitude_deg_offset_ );
       gps_msg.set_longitude_deg(gps_msg.longitude_deg() + longitude_deg_offset_);
       gps_msg.set_altitude(gps_msg.altitude() + altitude_offset_);
+
     }
 
     // Set GPS Spoofing Rotation Offsets
@@ -472,6 +478,10 @@ void GpsPlugin::OnSensorUpdate()
     }
     // gps_msg.set_altitude(gps_msg.altitude() + 1.5);
     // publish SITLGps msg at the defined update rate
+    info_msg.set_x(latitude_deg_offset_target_);
+    info_msg.set_y(attack_enabled);
+    info_msg.set_z(latitude_deg_offset_);
+    info_pub_->Publish(info_msg);
     gps_pub_->Publish(gps_msg);
     gps_data_pub_->Publish(raw_gps_msg);
   }
@@ -481,7 +491,7 @@ void GpsPlugin::OnOffsetUpdate(const boost::shared_ptr<const msgs::Vector3d> &_m
   latitude_deg_offset_target_ = _msg->x();
   longitude_deg_offset_target_ = _msg->y();
   altitude_offset_target_ = _msg->z();
-  attack_enabled = (pow(latitude_deg_offset_target_, 2.0) + pow(longitude_deg_offset_target_, 2.0) + pow(altitude_offset_target_, 2.0)) != 0.0 || (pow(latitude_deg_offset_, 2) + pow(longitude_deg_offset_, 2) + pow(altitude_offset_, 2)) != 0.0;
+  attack_enabled = ((pow(latitude_deg_offset_target_, 2.0) + pow(longitude_deg_offset_target_, 2.0) + pow(altitude_offset_target_, 2.0)) != 0.0) || ((pow(latitude_deg_offset_, 2) + pow(longitude_deg_offset_, 2) + pow(altitude_offset_, 2)) != 0.0);
 
   gzmsg << "[gazebo_gps_plugin] GPS offset updated to: latitude: " <<
     latitude_deg_offset_ <<

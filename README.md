@@ -1,13 +1,13 @@
-# UAViSec-An Simulation Platform for Intelligent UAV Cybersecurity Analysis
+# UAViSec-A Simulation Platform for Intelligent UAV Cybersecurity and Reliability Analysis
 
-Simulated UAV Attack with PX4 and QGroundControl.
+Demo Videos of UAV security simulation examples using this platform are available at: https://www.youtube.com/@uavisec/videos
 
 
 ## Setup
 The following steps are required in order to run the PX4 flight simulation software. This repository contains the code in order to collect data, run attacks, and run normal/attacked simulations with flight plans.
 1. Clone the repository
-    * https://github.com/loveyu917/UAV_platform
-    * https://github.com/loveyu917/PX4-Autopilot
+    * https://github.com/ai-uavsec/UAViSec (this repo)
+    * https://github.com/PX4/PX4-Autopilot
 
 2. Install and build PX4 Gazebo-Classic
 	* https://docs.px4.io/main/en/sim_gazebo_classic/
@@ -38,7 +38,7 @@ The following steps are required in order to run the PX4 flight simulation softw
 	  ```
 
 ## Tools
-These following tools are located within the `CLONED_REPOSITORY/spoofer/build` directory.
+The following tools are located within the `CLONED_REPOSITORY/spoofer/build` directory.
 * **spoofer.cc**\
     Perform different types of sensor attacks\
     The scale for each parameter are as follows:
@@ -137,7 +137,7 @@ These following tools are located within the `CLONED_REPOSITORY/spoofer/build` d
       ./spoofer -sonar <option : int> <distance_offset : double>
 
       <option> :  1 : Attack On/Off
-      <distance_offset>: the distance sensor has a range of [0.02,5.0] m. The sonar distance sensor only reflect the object within its max distance. If there
+      <distance_offset>: the distance sensor has a range of [0.02,5.0] m. The sonar distance sensor only reflects the object within its maximum distance. If there
       is nothing, the current distance equals to the max distance.
       ```
 
@@ -162,10 +162,19 @@ These following tools are located within the `CLONED_REPOSITORY/spoofer/build` d
   	``` console
    	make px4_sitl gazebo-classic_typhoon_h480__ksql_airport
    	```
-   	Test the lidar distance sensor Attack, you can use the iris_irlock modle. It contains a downward depth camera.
+   	Test the lidar distance sensor Attack, you can use the iris_irlock model. It contains a downward depth camera.
   	```console
    	make px4_sitl gazebo-classic_iris_irlock
    	```
-   	After the attack, you can obverse the data changing in the QGroundControl-> Analyze Tools -> MAVLink Inspector: Distance Sensor
+   	After the attack, you can observe the data changing in the QGroundControl-> Analyze Tools -> MAVLink Inspector: Distance Sensor
+  
+## Citation
+ ```
+@INPROCEEDINGS{UAVISEC,
+  	author={Yang, Boyin and Li, Yanyan and and Callaghan, Ryan and Song, Houbing and Yuan, Jiawei},
+  	booktitle={2025 International Conference on Unmanned Aircraft Systems (ICUAS)}, 
+  	title={A Simulation Platform for Intelligent UAV Cybersecurity and Reliability Analysis}, 
+  	year={2025}
+  }
   
 

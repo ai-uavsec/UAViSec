@@ -51,10 +51,12 @@ bool BaroAttack_=false;
 float scale= 0.0;
 double temperature_modifier = 0.0;
 double pressure_modifier = 0.0;
+bool baro_attack_zero=false;
 typedef const boost::shared_ptr<const msgs::Vector3d> Message;
 
 // transport
 transport::SubscriberPtr barolistener;
+transport::PublisherPtr baro_data_pub_;
 
 void OnBaroSignal(Message &_msg)
 {
@@ -68,6 +70,9 @@ void OnBaroSignal(Message &_msg)
   }
   else if(signal_ == 2.0){
     BaroAttack=false;
+  }
+  else if(signal_==3.0){
+    baro_attack_zero=!baro_attack_zero;
   }
   }
 
@@ -149,7 +154,9 @@ void BarometerPlugin::Load(physics::ModelPtr model, sdf::ElementPtr sdf)
       boost::bind(&BarometerPlugin::OnUpdate, this, _1));
 
   pub_baro_ = node_handle_->Advertise<sensor_msgs::msgs::Pressure>("~/" + model_->GetName() + baro_topic_, 10);
-  barolistener = node_handle_->Subscribe("~/attack/baro",&OnBaroSignal,this);
+  barolistener = node_handle_->Subscribe("~/attack/baro",OnBaroSignal,this);
+  baro_data_pub_ = node_handle_->Advertise<sensor_msgs::msgs::Pressure>("~/log/baro", 10);
+
 
 
   standard_normal_distribution_ = std::normal_distribution<double>(0.0, 1.0);
@@ -178,8 +185,6 @@ void BarometerPlugin::OnUpdate(const common::UpdateInfo&)
     ignition::math::Pose3d pose_model; // Z-component pose in local frame (relative to where it started)
     pose_model.Pos().Z() = pose_model_world.Pos().Z() - pose_model_start_.Pos().Z();
     const float alt_rel = pose_model.Pos().Z(); // Z-component from ENU
-    if(!BaroAttack)
-      scale=0.0;
     const float alt_amsl = (float)alt_home_ + alt_rel + scale;
     const float temperature_local = TEMPERATURE_MSL - LAPSE_RATE * alt_amsl;
 
@@ -211,15 +216,23 @@ void BarometerPlugin::OnUpdate(const common::UpdateInfo&)
 
     // Apply noise and drift
     const float abs_pressure_noise = 1.0f * (float)y1;  // 1 Pa RMS noise
+
     baro_drift_pa_ += baro_drift_pa_per_sec_ * dt;
     const float absolute_pressure_noisy = absolute_pressure + abs_pressure_noise + baro_drift_pa_;
 
     // convert to hPa
-    const float absolute_pressure_noisy_hpa = absolute_pressure_noisy * 0.01f;
-    baro_msg_.set_absolute_pressure(absolute_pressure_noisy_hpa);
-    if (BaroAttack) {
-	baro_msg_.set_absolute_pressure(absolute_pressure_noisy_hpa);
+    const float absolute_pressure_noisy_hpa = (absolute_pressure_noisy) * 0.01f;
+
+    double local_pressure_modifier = BaroAttack ? pressure_modifier : 0.0;
+    baro_msg_.set_absolute_pressure(absolute_pressure_noisy_hpa+local_pressure_modifier);
+  //   if (BaroAttack) {
+	// baro_msg_.set_absolute_pressure(absolute_pressure_noisy_hpa+local_pressure_modifier);
     }
+
+    // if (BaroAttack){
+    //     baro_msg_.set_absolute_pressure(absolute_pressure_noisy_hpa+scale);
+
+    // }
 
     // calculate air density at local temperature
     const float density_ratio = powf(TEMPERATURE_MSL / temperature_local , 4.256f);
@@ -246,26 +259,22 @@ void BarometerPlugin::OnUpdate(const common::UpdateInfo&)
     double local_temperature_modifier = BaroAttack ? temperature_modifier : 0.0;
     baro_msg_.set_temperature(temperature_local + local_temperature_modifier + ABSOLUTE_ZERO_C);
 
+    // if(BaroAttack_){
+    //   baro_msg_.set_temperature(temperature_local + ABSOLUTE_ZERO_C+scale);
+    // }
     // Fill baro msg
     baro_msg_.set_time_usec(current_time.Double() * 1e6);
-    // if(BaroAttack_){
-      // baro_msg_.set_absolute_pressure(absolute_pressure_noisy_hpa * scale);
-      // baro_msg_.set_pressure_altitude( pressure_altitude * scale);
-      // baro_msg_.set_temperature((temperature_local+ABSOLUTE_ZERO_C)*scale);
-      // baro_msg_.set_absolute_pressure(0);
-      // baro_msg_.set_pressure_altitude(0);
-      // baro_msg_.set_temperature((temperature_local+ABSOLUTE_ZERO_C) + scale);
-      // baro_msg_.set_absolute_pressure(scale*100);
 
-    // if (BaroAttack){
-    //   baro_msg_.set_temperature((temperature_local + ABSOLUTE_ZERO_C) * scale);
-    //   baro_msg_.set_absolute_pressure(absolute_pressure_noisy_hpa * scale);
-
-    // }
     last_pub_time_ = current_time;
+    if (baro_attack_zero){
+      baro_msg_.set_absolute_pressure(0);
+      baro_msg_.set_temperature(0);
+      baro_msg_.set_pressure_altitude(0);
+    }
 
     // Publish baro msg
     pub_baro_->Publish(baro_msg_);
+    baro_data_pub_->Publish(baro_msg_);
   }
 }
 }
