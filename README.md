@@ -28,7 +28,7 @@ The following steps are required in order to run the PX4 flight simulation softw
 	  ```
 
 ## Tools
-These following tools are located within the `CLONED_REPOSITORY/spoofer/build` directory.
+The following tools are located within the `CLONED_REPOSITORY/spoofer/build` directory.
 * **spoofer.cc**\
     Perform different types of sensor attacks\
     The scale for each parameter are as follows:
@@ -127,7 +127,7 @@ These following tools are located within the `CLONED_REPOSITORY/spoofer/build` d
       ./spoofer -sonar <option : int> <distance_offset : double>
 
       <option> :  1 : Attack On/Off
-      <distance_offset>: the distance sensor has a range of [0.02,5.0] m. The sonar distance sensor only reflect the object within its max distance. If there
+      <distance_offset>: the distance sensor has a range of [0.02,5.0] m. The sonar distance sensor only reflects the object within its maximum distance. If there
       is nothing, the current distance equals to the max distance.
       ```
 
@@ -147,10 +147,19 @@ These following tools are located within the `CLONED_REPOSITORY/spoofer/build` d
   	``` console
    	make px4_sitl gazebo-classic_typhoon_h480__ksql_airport
    	```
-   	Test the lidar distance sensor Attack, you can use the iris_irlock modle. It contains a downward depth camera.
+   	Test the lidar distance sensor Attack, you can use the iris_irlock model. It contains a downward depth camera.
   	```console
    	make px4_sitl gazebo-classic_iris_irlock
    	```
-   	After the attack, you can obverse the data changing in the QGroundControl-> Analyze Tools -> MAVLink Inspector: Distance Sensor
+   	After the attack, you can observe the data changing in the QGroundControl-> Analyze Tools -> MAVLink Inspector: Distance Sensor
+  
+## Citation
+ ```
+@INPROCEEDINGS{UAVISEC,
+  	author={Yang, Boyin and Li, Yanyan and and Callaghan, Ryan and Song, Houbing and Yuan, Jiawei},
+  	booktitle={2025 International Conference on Unmanned Aircraft Systems (ICUAS)}, 
+  	title={A Simulation Platform for Intelligent UAV Cybersecurity and Reliability Analysis}, 
+  	year={2025}
+  }
   
 
