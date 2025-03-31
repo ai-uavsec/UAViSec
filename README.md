@@ -34,7 +34,7 @@ The following steps are required in order to run the PX4 flight simulation softw
       cd spoofer
       git clone https://github.com/ocornut/imgui.git
     ```
-	5. Build tools
+6. Build tools
 	  ```console
 	  cd CLONED_REPOSITORY/spoofer
 	  chmod +x ./build.sh
