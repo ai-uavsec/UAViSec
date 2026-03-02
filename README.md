@@ -52,17 +52,17 @@ The following tools are located within the `CLONED_REPOSITORY/spoofer/build` dir
     * **Absolute Offset**\
       Change the GPS Attack parameters to change the offset of the latitude and longitude in degrees, and the altitude in meters.
         ```console
-        ./spoofer -abs <latitude:double> <longitude:double> <altitude:double>
+        ./spoofer --abs <latitude:double> <longitude:double> <altitude:double>
         ```
     * **Rotation Offset**\
       Change the GPS Attack parameters to change the offset by a particular degree amount.
         ```console
-        ./spoofer -rot <degrees:double> <rotation:double>
+        ./spoofer --rot <degrees:double> <rotation:double>
         ```
     * **Imu offset**\
       Change the IMU Attack parameters to change the bias by a particular
       ```console
-      ./spoofer -imu <option: int > <index:int > <offset:double>
+      ./spoofer --imu <option: int > <index:int > <offset:double>
 
       <option>: 1 : attack On.
                 2 : disable the imu, set all data to 0.
@@ -79,16 +79,16 @@ The following tools are located within the `CLONED_REPOSITORY/spoofer/build` dir
       <offset>
 
       e.x.:
-      ./spoofer -imu 3 2 2.0     //give a 2.0 increment offset to the Linear Acceleartion of Z. Save in the temp imu increment array.
-      ./spoofer -imu 1 2 2.0    //start the imu attack,with the offset data saved in last step.
-      ./spoofer -imu 5 2 2.0    //stop the attack.
-      ./spoofer -imu 4 2 2.0    //free the attack temp data.
+      ./spoofer --imu 3 2 2.0     //give a 2.0 increment offset to the Linear Acceleartion of Z. Save in the temp imu increment array.
+      ./spoofer --imu 1 2 2.0    //start the imu attack,with the offset data saved in last step.
+      ./spoofer --imu 5 2 2.0    //stop the attack.
+      ./spoofer --imu 4 2 2.0    //free the attack temp data.
       ```
     * **Stream simulation**\
       Influence the live stream frame, like flip and add noise into the figure capture by camera.
 
       ```console
-      ./spoofer -stream <option>
+      ./spoofer --stream <option>
 
       <option>: 1:  flip the stream camera.
                 2:  Add a noise to the center area of the picture.
@@ -100,7 +100,7 @@ The following tools are located within the `CLONED_REPOSITORY/spoofer/build` dir
     * **Motor Offset**\
       Change the Motor speed in the simulator which will backward influence the autopilot motor outputs performance
       ```console
-      ./spoofer -motor <option:int>  <index : int> <thrust speed:int>
+      ./spoofer --motor <option:int>  <index : int> <thrust speed:int>
 
       <option> :
         1 : attack input On/Off.
@@ -111,14 +111,14 @@ The following tools are located within the `CLONED_REPOSITORY/spoofer/build` dir
 
       <thrust speed> : 0 ~ max thrust speed = 1450.
 
-      e.x.: ./spoofer -motor 1 0 500      	  //start the attack the #0 motor with speed 500.
-            ./spoofer -motor 2 0 0      	  //make all the motor speed to 0
+      e.x.: ./spoofer --motor 1 0 500      	  //start the attack the #0 motor with speed 500.
+            ./spoofer --motor 2 0 0      	  //make all the motor speed to 0
       ```
     * **Magnetometer Spoof**\
       Change the Magnetometer attack parameters to change the amount of the magnetometer. Swap the x, y axis of the Magnetic field data
 
       ```console
-      ./spoofer -mag <option:int>
+      ./spoofer --mag <option:int>
 
       <option>: 1: swap the magnetic_field.x()  with  magnetic_field.y()
       ```
@@ -129,7 +129,7 @@ The following tools are located within the `CLONED_REPOSITORY/spoofer/build` dir
       Change the lidar sensor data with a constant offset (distance sensor)
 
       ```console
-      ./spoofer -lidar <option : int> <distance_offset : double>
+      ./spoofer --lidar <option : int> <distance_offset : double>
 
       <option> :  1 : Attack On/Off
       <distance_offset>: the distance sensor has a range of [0.17,15.0] m. The distance sensor will display none after the reading exceeds 15 meters.
@@ -138,7 +138,7 @@ The following tools are located within the `CLONED_REPOSITORY/spoofer/build` dir
       Change the Sonar sensor data with a constant offset (distance sensor)
 
       ```console
-      ./spoofer -sonar <option : int> <distance_offset : double>
+      ./spoofer --sonar <option : int> <distance_offset : double>
 
       <option> :  1 : Attack On/Off
       <distance_offset>: the distance sensor has a range of [0.02,5.0] m. The sonar distance sensor only reflects the object within its maximum distance. If there
@@ -149,7 +149,7 @@ The following tools are located within the `CLONED_REPOSITORY/spoofer/build` dir
       Change the altitude Attack parameters to change the offset by a particular absolute altitude and then it will auto change the absolute pressure and the temperature data computed by the new altitude.
 
       ```console
-      ./spoofer -baro <option:int> <offset : double>
+      ./spoofer --baro <option:int> <offset : double>
 
       <option>:  1: Attack On/Off
       <offset>:   the offset data you want the sensor make.
